@@ -5,27 +5,51 @@ import Link from "next/link";
 const menuData = [
   {
     title: "Shop By Category",
-    links: ["All Jewelry", "Rings", "Earrings", "Necklaces", "Bracelets"]
+    links: [
+      { label: "Rings", href: "/rings" },
+      { label: "Earrings", href: "/earrings" },
+      { label: "Necklaces", href: "/necklaces" },
+      { label: "Bracelets", href: "/bracelets" }
+    ]
   },
   {
     title: "Shop By Gender",
-    links: ["For Her", "For Him"]
+    links: [
+      { label: "For Her", href: "/for-her" },
+      { label: "For Him", href: "/for-him" }
+    ]
   },
   {
     title: "Material",
-    links: ["Gold", "Silver"]
+    links: [
+      { label: "Gold", href: "/gold" },
+      { label: "Silver", href: "/silver" }
+    ]
   },
   {
     title: "Price Range",
-    links: ["Under $500", "$500 - $1,000", "$1,000 - $5,000", "Over $5,000"]
+    links: [
+      { label: "Under $500", href: "#" },
+      { label: "$500 - $1,000", href: "#" },
+      { label: "$1,000 - $5,000", href: "#" },
+      { label: "Over $5,000", href: "#" }
+    ]
   },
   {
     title: "Collection",
-    links: ["New Arrivals", "Best Sellers", "Trending Bridal"]
+    links: [
+      { label: "New Arrivals", href: "#" },
+      { label: "Best Sellers", href: "#" },
+      { label: "Trending Bridal", href: "#" }
+    ]
   },
   {
     title: "Offers",
-    links: ["On Sale", "Buy 1 Get 1", "Discounted Items"]
+    links: [
+      { label: "On Sale", href: "#" },
+      { label: "Buy 1 Get 1", href: "#" },
+      { label: "Discounted Items", href: "#" }
+    ]
   }
 ];
 
@@ -74,11 +98,11 @@ export default function SidebarMenu({ isOpen, onClose }) {
                     {section.links.map((link, linkIdx) => (
                       <Link 
                         key={linkIdx} 
-                        href="#" 
+                        href={link.href} 
                         onClick={onClose}
                         className="text-brand-body font-serif text-xl hover:text-brand-btn-hover hover:translate-x-1 transition-all duration-300 w-fit"
                       >
-                        {link}
+                        {link.label}
                       </Link>
                     ))}
                   </div>

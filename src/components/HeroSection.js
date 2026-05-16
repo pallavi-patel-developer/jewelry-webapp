@@ -58,21 +58,17 @@ export default function HeroSection() {
 
       if (wheelTimeout.current) return;
 
-      // Ignore tiny trackpad movements to prevent accidental triggering
       if (Math.abs(e.deltaY) < 20) return;
 
       if (e.deltaY > 0) {
-        // Scroll down
         setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
       } else if (e.deltaY < 0) {
-        // Scroll up
         setCurrentImageIndex((prev) => (prev === 0 ? heroImages.length - 1 : prev - 1));
       }
 
-      // 250ms delay to prevent rapid spinning, but low enough to feel instantly responsive
       wheelTimeout.current = setTimeout(() => {
         wheelTimeout.current = null;
-      }, 250);
+      }, 50);
     };
 
     // passive: false is required to allow e.preventDefault()

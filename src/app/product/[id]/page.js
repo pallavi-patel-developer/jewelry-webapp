@@ -10,7 +10,7 @@ export default function ProductPage({ params }) {
   // In newer Next.js versions, params might be a promise.
   const resolvedParams = use(params);
   const { id } = resolvedParams;
-  
+
   const product = products.find((p) => p.id.toString() === id);
   const [selectedSize, setSelectedSize] = useState("");
 
@@ -48,7 +48,7 @@ export default function ProductPage({ params }) {
             <h1 className="text-4xl md:text-5xl font-serif text-brand-heading uppercase tracking-widest mb-4">
               {product.name}
             </h1>
-            
+
             <div className="flex items-end gap-4 mb-8">
               <span className="text-3xl font-sans text-brand-heading font-medium tracking-wide">
                 {product.discountedPrice}
@@ -72,11 +72,10 @@ export default function ProductPage({ params }) {
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`border transition-all duration-300 font-sans text-sm tracking-wider py-3 px-6 rounded-sm ${
-                      selectedSize === size
+                    className={`border transition-all duration-300 font-sans text-sm tracking-wider py-3 px-6 rounded-sm ${selectedSize === size
                         ? "border-brand-heading bg-brand-heading text-brand-light"
                         : "border-brand-border text-brand-heading hover:border-brand-heading"
-                    }`}
+                      }`}
                   >
                     {size}
                   </button>
@@ -89,7 +88,7 @@ export default function ProductPage({ params }) {
               <ShoppingBag className="w-5 h-5" strokeWidth={1.5} />
               Add to Cart
             </button>
-            
+
             {/* Additional Details */}
             <div className="mt-12 pt-8 border-t border-brand-border/50 flex flex-col gap-4">
               <div className="flex items-center gap-4 text-brand-body font-sans text-sm">

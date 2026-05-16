@@ -58,6 +58,9 @@ export default function HeroSection() {
 
       if (wheelTimeout.current) return;
 
+      // Ignore tiny trackpad movements to prevent accidental triggering
+      if (Math.abs(e.deltaY) < 20) return;
+
       if (e.deltaY > 0) {
         // Scroll down
         setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
@@ -66,10 +69,10 @@ export default function HeroSection() {
         setCurrentImageIndex((prev) => (prev === 0 ? heroImages.length - 1 : prev - 1));
       }
 
-      // 1000ms delay between image swaps to prevent rapid scrolling during the smooth transition
+      // 250ms delay to prevent rapid spinning, but low enough to feel instantly responsive
       wheelTimeout.current = setTimeout(() => {
         wheelTimeout.current = null;
-      }, 6000);
+      }, 250);
     };
 
     // passive: false is required to allow e.preventDefault()
@@ -152,7 +155,7 @@ export default function HeroSection() {
             transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
             className="relative w-full h-full min-h-[400px] cursor-none"
           >
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               <motion.div
                 key={currentImageIndex}
                 initial={{ opacity: 0 }}

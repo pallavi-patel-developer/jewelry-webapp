@@ -1,11 +1,54 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+
+const heroImages = [
+  "/images/hero-hand-v2.png",
+  "/images/hero-hand-v3.png",
+  "/images/hero-hand2.png"
+];
 import CategoryMenu from "./CategoryMenu";
+import MarqueeBanner from "./MarqueeBanner";
 import Image from "next/image";
 
 export default function HeroSection() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const wheelTimeout = useRef(null);
+  const imageContainerRef = useRef(null);
+
+  useEffect(() => {
+    const el = imageContainerRef.current;
+    if (!el) return;
+
+    const handleNativeWheel = (e) => {
+      e.preventDefault(); // Stop page scrolling while cycling images
+
+      if (wheelTimeout.current) return;
+
+      if (e.deltaY > 0) {
+        // Scroll down
+        setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+      } else if (e.deltaY < 0) {
+        // Scroll up
+        setCurrentImageIndex((prev) => (prev === 0 ? heroImages.length - 1 : prev - 1));
+      }
+
+      // 1000ms delay between image swaps to prevent rapid scrolling during the smooth transition
+      wheelTimeout.current = setTimeout(() => {
+        wheelTimeout.current = null;
+      }, 6000);
+    };
+
+    // passive: false is required to allow e.preventDefault()
+    el.addEventListener('wheel', handleNativeWheel, { passive: false });
+
+    return () => {
+      el.removeEventListener('wheel', handleNativeWheel);
+    };
+  }, []);
+
   return (
     <main className="relative w-full flex-grow flex flex-col px-6 md:px-12 py-10 overflow-hidden">
 
@@ -15,7 +58,7 @@ export default function HeroSection() {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
         className="absolute top-0 md:top-4 left-0 w-full text-center pointer-events-none z-0 flex flex-col items-center justify-center"
       >
         <div className="relative w-full flex items-center justify-center mt-4">
@@ -29,14 +72,14 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Main Content 3-Column Grid */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 h-full items-center mt-28 md:mt-48 max-w-[1600px] mx-auto w-full flex-grow">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-4 items-center mt-28 md:mt-48 max-w-[1600px] mx-auto w-full">
 
         {/* Left Column */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="flex flex-col space-y-20 md:pr-16 md:self-center z-20"
+          className="flex flex-col space-y-4 mb-32 md:pr-16 md:self-center z-20"
         >
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-brand-heading leading-[1.1]">
             ELEGANT <br />
@@ -59,18 +102,34 @@ export default function HeroSection() {
           className="relative h-[60vh] md:h-[80vh] w-full flex justify-center items-end order-first md:order-none z-10 -mt-16 md:mt-0"
         >
           <motion.div
+            ref={imageContainerRef}
             animate={{ y: [0, -15, 0] }}
             transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
             className="relative w-full h-full min-h-[400px]"
           >
-            <Image
-              src="/images/hero-hand-new.png"
-              alt="Mannequin hand wearing diamond rings"
-              fill
-              sizes="(max-width: 768px) 100vw, 33vw"
-              priority
-              className="object-contain object-center scale-125 md:scale-[1.45] -translate-y-12 md:-translate-y-24 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
-            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentImageIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="absolute inset-0"
+              >
+                <Image
+                  src={heroImages[currentImageIndex]}
+                  alt="Mannequin hand wearing diamond rings"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  priority
+                  className={`object-contain object-center ${currentImageIndex === 1
+                    ? "scale-100 md:scale-[1.15] -translate-y-6 md:-translate-y-12"
+                    : "scale-125 md:scale-[1.45] -translate-y-12 md:-translate-y-24"
+                    }`}
+                  style={{ mixBlendMode: "multiply" }}
+                />
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
         </motion.div>
 
@@ -79,9 +138,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="flex flex-col justify-center h-full space-y-22 md:self-center z-20"
+          className="flex flex-col justify-center pb-36 h-full space-y-4 md:self-center z-20"
         >
-          <h3 className="text-2xl md:text-3xl font-serif text-brand-heading md:text-right leading-snug tracking-wide uppercase">
+          <h3 className="text-2xl  md:text-3xl font-serif text-brand-heading md:text-right leading-snug tracking-wide uppercase">
             A Celestial Touch <br />
             For Timeless Moments
           </h3>
@@ -89,6 +148,8 @@ export default function HeroSection() {
         </motion.div>
 
       </div>
+
+      <MarqueeBanner />
     </main>
   );
 }

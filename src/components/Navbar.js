@@ -44,9 +44,9 @@ export default function Navbar() {
 
       {/* Right: Icons */}
       <div className="flex items-center gap-6 justify-end flex-1">
-        <button className="text-brand-heading hover:text-brand-btn-hover transition-colors" aria-label="Shopping Bag">
+        <Link href="/cart" className="text-brand-heading hover:text-brand-btn-hover transition-colors" aria-label="Shopping Bag">
           <ShoppingBag className="w-5 h-5" strokeWidth={1.5} />
-        </button>
+        </Link>
         <button className="text-brand-heading hover:text-brand-btn-hover transition-colors" aria-label="User Profile">
           <User className="w-5 h-5" strokeWidth={1.5} />
         </button>

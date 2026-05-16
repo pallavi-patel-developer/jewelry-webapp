@@ -1,13 +1,6 @@
 import Image from "next/image";
-
-const dummyProducts = [
-  { id: 1, name: "Aurelia Signature Ring", price: "₹1,200", image: "/images/ring.png" },
-  { id: 2, name: "Celestial Earrings", price: "₹850", image: "/images/earring.png" },
-  { id: 3, name: "Eternity Necklace", price: "₹2,100", image: "/images/necklace.png" },
-  { id: 4, name: "Royal Bracelet", price: "₹3,500", image: "/images/bracelet.png" },
-  { id: 5, name: "Midnight Pendant", price: "₹950", image: "/images/pendant.png" },
-  { id: 6, name: "Golden Horizon Ring", price: "₹1,500", image: "/images/ring.png" },
-];
+import Link from "next/link";
+import { products } from "@/data/products";
 
 export default function ProductGrid({ title }) {
   return (
@@ -16,8 +9,8 @@ export default function ProductGrid({ title }) {
         {title}
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-16">
-        {dummyProducts.map((item) => (
-          <div key={item.id} className="flex flex-col group cursor-pointer">
+        {products.map((item) => (
+          <Link key={item.id} href={`/product/${item.id}`} className="flex flex-col group cursor-pointer">
             <div className="relative w-full aspect-square bg-[#e8dfd8] overflow-hidden rounded-sm mb-6 flex items-center justify-center">
               <Image 
                 src={item.image} 
@@ -30,9 +23,12 @@ export default function ProductGrid({ title }) {
             </div>
             <div className="flex flex-col items-center text-center gap-2">
               <h3 className="font-serif text-xl text-brand-heading tracking-wide uppercase">{item.name}</h3>
-              <p className="font-sans text-brand-body text-sm tracking-[0.1em]">{item.price}</p>
+              <div className="flex items-center gap-3">
+                <p className="font-sans text-brand-body/60 text-sm tracking-[0.1em] line-through">{item.originalPrice}</p>
+                <p className="font-sans text-brand-heading font-medium text-sm tracking-[0.1em]">{item.discountedPrice}</p>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

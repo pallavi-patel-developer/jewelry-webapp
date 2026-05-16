@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Celestique | Premium Luxury Jewelry",
+  title: "Aurelia | Premium Luxury Jewelry",
   description: "A celestial touch for timeless moments.",
 };
 

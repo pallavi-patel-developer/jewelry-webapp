@@ -29,10 +29,10 @@ const menuData = [
   {
     title: "Price Range",
     links: [
-      { label: "Under $500", href: "#" },
-      { label: "$500 - $1,000", href: "#" },
-      { label: "$1,000 - $5,000", href: "#" },
-      { label: "Over $5,000", href: "#" }
+      { label: "Under ₹500", href: "#" },
+      { label: "₹500 - ₹1,000", href: "#" },
+      { label: "₹1,000 - ₹5,000", href: "#" },
+      { label: "Over ₹5,000", href: "#" }
     ]
   },
   {

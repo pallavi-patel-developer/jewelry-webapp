@@ -19,25 +19,54 @@ export default function ContactPage() {
           We invite you to reach out for bespoke appointments, general inquiries, or assistance with finding the perfect piece.
         </p>
         
-        <div className="flex flex-col md:flex-row gap-12 text-left bg-brand-card/50 backdrop-blur-sm p-10 md:p-16 rounded-2xl border border-brand-border">
-          <div className="flex flex-col gap-4">
-            <h3 className="font-serif text-2xl text-brand-heading uppercase">Visit Our Boutique</h3>
-            <p className="text-brand-body font-sans text-sm">
-              123 Avenue of the Stars<br />
-              Suite 400<br />
-              Los Angeles, CA 90067
-            </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full max-w-5xl mx-auto bg-brand-card/50 backdrop-blur-sm p-8 md:p-12 rounded-2xl border border-brand-border text-left shadow-sm">
+          {/* Contact Form */}
+          <div className="flex flex-col gap-6">
+            <h3 className="font-serif text-3xl text-brand-heading uppercase">Send an Inquiry</h3>
+            <form className="flex flex-col gap-6">
+              <input 
+                type="text" 
+                placeholder="Your Name" 
+                className="w-full bg-transparent border-b border-brand-border pb-3 outline-none focus:border-brand-btn transition-colors placeholder:text-brand-body/60 text-brand-heading font-sans" 
+              />
+              <input 
+                type="email" 
+                placeholder="Your Email" 
+                className="w-full bg-transparent border-b border-brand-border pb-3 outline-none focus:border-brand-btn transition-colors placeholder:text-brand-body/60 text-brand-heading font-sans" 
+              />
+              <textarea 
+                placeholder="Your Message" 
+                rows={4} 
+                className="w-full bg-transparent border-b border-brand-border pb-3 outline-none focus:border-brand-btn transition-colors placeholder:text-brand-body/60 text-brand-heading font-sans resize-none"
+              ></textarea>
+              <button 
+                type="button" 
+                className="mt-2 bg-brand-btn text-brand-light font-sans text-xs tracking-[0.15em] uppercase py-4 px-8 rounded-sm hover:bg-brand-btn-hover transition-colors w-fit"
+              >
+                Submit Request
+              </button>
+            </form>
           </div>
-          
-          <div className="hidden md:block w-px bg-brand-border h-full"></div>
-          
-          <div className="flex flex-col gap-4">
-            <h3 className="font-serif text-2xl text-brand-heading uppercase">Get in Touch</h3>
-            <p className="text-brand-body font-sans text-sm">
-              Email: concierge@aurelia.com<br />
-              Phone: +1 (555) 123-4567<br />
-              Hours: Mon-Sat, 10am - 7pm
-            </p>
+
+          {/* Contact Info */}
+          <div className="flex flex-col gap-10 lg:pl-12 lg:border-l border-brand-border justify-center">
+            <div className="flex flex-col gap-4">
+              <h3 className="font-serif text-2xl text-brand-heading uppercase">Visit Our Boutique</h3>
+              <p className="text-brand-body font-sans text-base leading-relaxed">
+                123 Avenue of the Stars<br />
+                Suite 400<br />
+                Los Angeles, CA 90067
+              </p>
+            </div>
+            
+            <div className="flex flex-col gap-4">
+              <h3 className="font-serif text-2xl text-brand-heading uppercase">Get in Touch</h3>
+              <p className="text-brand-body font-sans text-base leading-relaxed">
+                Email: concierge@aurelia.com<br />
+                Phone: +1 (555) 123-4567<br />
+                Hours: Mon-Sat, 10am - 7pm
+              </p>
+            </div>
           </div>
         </div>
       </main>

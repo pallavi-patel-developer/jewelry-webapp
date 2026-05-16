@@ -11,11 +11,11 @@ export default function Page() {
   return (
     <div className="min-h-screen flex flex-col relative overflow-hidden bg-brand-bg">
       <Navbar />
-      
+
       {/* Banner Section */}
       <div className="w-full relative h-[40vh] md:h-[70vh] bg-brand-hero border-b border-brand-border">
         <Image
-          src="/images/for-her-banner.png"
+          src="/images/for-her-banner-new.png"
           alt="For Her Collection Banner"
           fill
           priority

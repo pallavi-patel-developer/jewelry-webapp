@@ -1,12 +1,12 @@
 import Image from "next/image";
 
 const dummyProducts = [
-  { id: 1, name: "Aurelia Signature Ring", price: "$1,200", image: "/images/ring.png" },
-  { id: 2, name: "Celestial Earrings", price: "$850", image: "/images/earring.png" },
-  { id: 3, name: "Eternity Necklace", price: "$2,100", image: "/images/necklace.png" },
-  { id: 4, name: "Royal Bracelet", price: "$3,500", image: "/images/bracelet.png" },
-  { id: 5, name: "Midnight Pendant", price: "$950", image: "/images/pendant.png" },
-  { id: 6, name: "Golden Horizon Ring", price: "$1,500", image: "/images/ring.png" },
+  { id: 1, name: "Aurelia Signature Ring", price: "₹1,200", image: "/images/ring.png" },
+  { id: 2, name: "Celestial Earrings", price: "₹850", image: "/images/earring.png" },
+  { id: 3, name: "Eternity Necklace", price: "₹2,100", image: "/images/necklace.png" },
+  { id: 4, name: "Royal Bracelet", price: "₹3,500", image: "/images/bracelet.png" },
+  { id: 5, name: "Midnight Pendant", price: "₹950", image: "/images/pendant.png" },
+  { id: 6, name: "Golden Horizon Ring", price: "₹1,500", image: "/images/ring.png" },
 ];
 
 export default function ProductGrid({ title }) {

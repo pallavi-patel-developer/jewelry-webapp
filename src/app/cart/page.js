@@ -3,13 +3,13 @@
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
-import { Trash2, Plus, Minus, ArrowLeft } from "lucide-react";
+import { Trash2, Plus, Minus, ArrowLeft, Heart, Bookmark } from "lucide-react";
 import { products } from "@/data/products";
 
 // Dummy cart items for demonstration
 const dummyCartItems = [
-  { ...products[0], quantity: 1, selectedSize: "7" },
-  { ...products[2], quantity: 1, selectedSize: "18 inch" },
+  { ...products[0], quantity: 1, selectedSize: "7", sku: "AUR-RG-001", metal: "18k White Gold" },
+  { ...products[2], quantity: 1, selectedSize: "18 inch", sku: "AUR-NC-042", metal: "18k Rose Gold" },
 ];
 
 export default function CartPage() {
@@ -19,7 +19,9 @@ export default function CartPage() {
   }, 0);
 
   const shipping = 0; // Free shipping for luxury items
-  const total = subtotal + shipping;
+  const taxRate = 0.03; // 3% GST for jewelry
+  const estimatedTax = subtotal * taxRate;
+  const total = subtotal + shipping + estimatedTax;
 
   return (
     <div className="min-h-screen flex flex-col bg-brand-bg">
@@ -62,13 +64,25 @@ export default function CartPage() {
                           <h3 className="font-serif text-xl text-brand-heading uppercase tracking-wide">
                             {item.name}
                           </h3>
-                          <p className="text-brand-body text-sm font-sans">
+                          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-widest font-sans text-brand-body/70">
+                            <span>SKU: {item.sku}</span>
+                            <span>Metal: {item.metal}</span>
+                          </div>
+                          <p className="text-brand-body text-sm font-sans mt-1">
                             Size: <span className="font-semibold">{item.selectedSize}</span>
                           </p>
                         </div>
-                        <button className="text-brand-body/40 hover:text-brand-heading transition-colors">
-                          <Trash2 className="w-5 h-5" strokeWidth={1.5} />
-                        </button>
+                        <div className="flex gap-2">
+                          <button className="text-brand-body/40 hover:text-brand-heading transition-colors p-2" title="Save for Later">
+                            <Bookmark className="w-4 h-4" strokeWidth={1.5} />
+                          </button>
+                          <button className="text-brand-body/40 hover:text-brand-heading transition-colors p-2" title="Move to Wishlist">
+                            <Heart className="w-4 h-4" strokeWidth={1.5} />
+                          </button>
+                          <button className="text-brand-body/40 hover:text-red-800 transition-colors p-2" title="Remove">
+                            <Trash2 className="w-4 h-4" strokeWidth={1.5} />
+                          </button>
+                        </div>
                       </div>
 
                       <div className="flex justify-between items-center mt-6">
@@ -120,6 +134,10 @@ export default function CartPage() {
                   <div className="flex justify-between opacity-80">
                     <span>Shipping</span>
                     <span>{shipping === 0 ? "Complimentary" : `₹${shipping}`}</span>
+                  </div>
+                  <div className="flex justify-between opacity-80">
+                    <span>Estimated GST (3%)</span>
+                    <span>₹{estimatedTax.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-xl font-serif border-t border-white/10 pt-6 mt-2 uppercase tracking-[0.1em]">
                     <span>Total</span>

@@ -47,9 +47,9 @@ export default function Navbar() {
         <Link href="/cart" className="text-brand-heading hover:text-brand-btn-hover transition-colors" aria-label="Shopping Bag">
           <ShoppingBag className="w-5 h-5" strokeWidth={1.5} />
         </Link>
-        <button className="text-brand-heading hover:text-brand-btn-hover transition-colors" aria-label="User Profile">
+        <Link href="/profile" className="text-brand-heading hover:text-brand-btn-hover transition-colors" aria-label="User Profile">
           <User className="w-5 h-5" strokeWidth={1.5} />
-        </button>
+        </Link>
       </div>
     </motion.nav>
     </>

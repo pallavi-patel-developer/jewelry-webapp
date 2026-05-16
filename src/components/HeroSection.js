@@ -1,13 +1,31 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const heroImages = [
   "/images/hero-hand-v2.png",
   "/images/hero-hand-v3.png",
   "/images/hero-hand2.png"
+];
+
+const heroContent = [
+  {
+    titleLine1: "ELEGANT",
+    titleLine2: "JEWELRY",
+    description: "Discover exquisite jewelry inspired by the beauty of the heavens. Each piece is crafted to bring elegance and grace to your most cherished occasions."
+  },
+  {
+    titleLine1: "TIMELESS",
+    titleLine2: "BEAUTY",
+    description: "Embrace the legacy of fine craftsmanship. Our exclusive collection highlights the pure brilliance of diamonds matched with timeless designs."
+  },
+  {
+    titleLine1: "LUXURY",
+    titleLine2: "COLLECTION",
+    description: "Experience the ultimate expression of luxury. Carefully curated pieces that symbolize your unique journey and unforgettable moments."
+  }
 ];
 import CategoryMenu from "./CategoryMenu";
 import MarqueeBanner from "./MarqueeBanner";
@@ -17,6 +35,19 @@ export default function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const wheelTimeout = useRef(null);
   const imageContainerRef = useRef(null);
+
+  // Custom Cursor State
+  const [isHoveringImage, setIsHoveringImage] = useState(false);
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const springConfig = { damping: 25, stiffness: 700 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+
+  const handleMouseMove = (e) => {
+    cursorX.set(e.clientX - 40); // Offset by half the width of the cursor (80px)
+    cursorY.set(e.clientY - 40);
+  };
 
   useEffect(() => {
     const el = imageContainerRef.current;
@@ -81,14 +112,25 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="flex flex-col space-y-4 mb-32 md:pr-16 md:self-center z-20"
         >
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-brand-heading leading-[1.1]">
-            ELEGANT <br />
-            <span className="text-brand-heading/90">JEWELRY</span>
-          </h2>
-          <p className="text-brand-body font-sans text-sm md:text-base leading-relaxed max-w-[280px]">
-            Discover exquisite jewelry inspired by the beauty of the heavens. Each piece is crafted to bring elegance and grace to your most cherished occasions.
-          </p>
-          <button className="flex items-center gap-3 bg-brand-btn text-brand-light rounded-full py-3.5 px-8 w-fit hover:bg-brand-btn-hover transition-colors group shadow-sm">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImageIndex}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className="flex flex-col space-y-4 min-h-[200px]"
+            >
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-brand-heading leading-[1.1]">
+                {heroContent[currentImageIndex].titleLine1} <br />
+                <span className="text-brand-heading/90">{heroContent[currentImageIndex].titleLine2}</span>
+              </h2>
+              <p className="text-brand-body font-sans text-sm md:text-base leading-relaxed max-w-[280px]">
+                {heroContent[currentImageIndex].description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+          <button className="flex items-center gap-3 bg-brand-btn text-brand-light rounded-full py-3.5 px-8 w-fit hover:bg-brand-btn-hover transition-colors group shadow-sm mt-4">
             <span className="font-sans text-xs tracking-[0.15em] uppercase font-medium">Shop Now</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
           </button>
@@ -103,9 +145,12 @@ export default function HeroSection() {
         >
           <motion.div
             ref={imageContainerRef}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHoveringImage(true)}
+            onMouseLeave={() => setIsHoveringImage(false)}
             animate={{ y: [0, -15, 0] }}
             transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-            className="relative w-full h-full min-h-[400px]"
+            className="relative w-full h-full min-h-[400px] cursor-none"
           >
             <AnimatePresence mode="wait">
               <motion.div
@@ -150,6 +195,30 @@ export default function HeroSection() {
       </div>
 
       <MarqueeBanner />
+
+      {/* Custom Tracking Cursor */}
+      <AnimatePresence>
+        {isHoveringImage && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            style={{
+              x: cursorXSpring,
+              y: cursorYSpring,
+              position: "fixed",
+              top: 0,
+              left: 0,
+              pointerEvents: "none",
+              zIndex: 9999,
+            }}
+            className="w-20 h-20 bg-brand-heading text-brand-light rounded-full flex items-center justify-center text-[10px] tracking-[0.2em] font-bold uppercase shadow-2xl"
+          >
+            Scroll
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </main>
   );
 }

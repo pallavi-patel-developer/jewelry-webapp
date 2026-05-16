@@ -6,8 +6,9 @@ import { ArrowRight } from "lucide-react";
 
 const heroImages = [
   "/images/hero-hand-v2.png",
+  "/images/hero-hand-v5.png",
   "/images/hero-hand-v3.png",
-  "/images/hero-hand2.png"
+  "/images/hero-hand-v4.png"
 ];
 
 const heroContent = [
@@ -25,6 +26,11 @@ const heroContent = [
     titleLine1: "LUXURY",
     titleLine2: "COLLECTION",
     description: "Experience the ultimate expression of luxury. Carefully curated pieces that symbolize your unique journey and unforgettable moments."
+  },
+  {
+    titleLine1: "CELESTIAL",
+    titleLine2: "GRACE",
+    description: "Adorn yourself with the stars. Each piece is a masterwork designed to capture the breathtaking beauty of the cosmos."
   }
 ];
 import CategoryMenu from "./CategoryMenu";
@@ -43,6 +49,21 @@ export default function HeroSection() {
   const springConfig = { damping: 25, stiffness: 700 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
+
+  const getImageStyles = (index) => {
+    switch (index) {
+      case 0: // hero-hand-v2.png
+        return "scale-125 md:scale-[1.45] -translate-y-12 md:-translate-y-24";
+      case 1: // hero-hand-v5.png - scale down significantly to match v2's visual size
+        return "scale-75 md:scale-95 -translate-y-2 md:-translate-y-4";
+      case 2: // hero-hand-v3.png
+        return "scale-100 md:scale-[1.15] -translate-y-6 md:-translate-y-12";
+      case 3: // hero-hand-v4.png
+        return "scale-125 md:scale-[1.45] -translate-y-12 md:-translate-y-24";
+      default:
+        return "scale-125 md:scale-[1.45] -translate-y-12 md:-translate-y-24";
+    }
+  };
 
   const handleMouseMove = (e) => {
     cursorX.set(e.clientX - 40); // Offset by half the width of the cursor (80px)
@@ -166,10 +187,7 @@ export default function HeroSection() {
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
                   priority
-                  className={`object-contain object-center ${currentImageIndex === 1
-                    ? "scale-100 md:scale-[1.15] -translate-y-6 md:-translate-y-12"
-                    : "scale-125 md:scale-[1.45] -translate-y-12 md:-translate-y-24"
-                    }`}
+                  className={`object-contain object-center ${getImageStyles(currentImageIndex)}`}
                   style={{ mixBlendMode: "multiply" }}
                 />
               </motion.div>

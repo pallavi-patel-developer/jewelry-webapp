@@ -2,13 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkle } from "lucide-react";
 
 const heroImages = [
   "/images/hero-hand-v2.png",
   "/images/hero-hand-v5.png",
   "/images/hero-hand-v3.png",
-  "/images/hero-hand-v4.png"
+  "/images/hero-hand-v6.png"
 ];
 
 const heroContent = [
@@ -31,6 +31,11 @@ const heroContent = [
     titleLine1: "CELESTIAL",
     titleLine2: "GRACE",
     description: "Adorn yourself with the stars. Each piece is a masterwork designed to capture the breathtaking beauty of the cosmos."
+  },
+  {
+    titleLine1: "GREEN",
+    titleLine2: "EMERALD",
+    description: "Discover the regal charm of emeralds. Handcrafted with precision and passion, our emerald collection adds a touch of royal elegance to your look."
   }
 ];
 import CategoryMenu from "./CategoryMenu";
@@ -58,8 +63,8 @@ export default function HeroSection() {
         return "scale-75 md:scale-95 -translate-y-2 md:-translate-y-4";
       case 2: // hero-hand-v3.png
         return "scale-100 md:scale-[1.15] -translate-y-6 md:-translate-y-12";
-      case 3: // hero-hand-v4.png
-        return "scale-125 md:scale-[1.45] -translate-y-12 md:-translate-y-24";
+      case 3: // hero-hand-v6.png
+        return "scale-75 md:scale-[0.85] -translate-y-8 md:-translate-y-16";
       default:
         return "scale-125 md:scale-[1.45] -translate-y-12 md:-translate-y-24";
     }
@@ -112,13 +117,21 @@ export default function HeroSection() {
         transition={{ duration: 0.2, ease: "easeOut" }}
         className="absolute top-0 md:top-4 left-0 w-full text-center pointer-events-none z-0 flex flex-col items-center justify-center"
       >
-        <div className="relative w-full flex items-center justify-center mt-4">
+        <div className="relative w-full flex flex-col items-center justify-center mt-4">
           <h1
-            className="text-[12vw] md:text-[10vw] lg:text-[8rem] leading-none text-brand-heading tracking-widest relative z-10 px-4 md:px-12 inline-block uppercase font-bold"
+            className="text-[12vw] md:text-[10vw] lg:text-[8.5rem] leading-none text-brand-heading tracking-[0.3em] relative z-10 px-4 md:px-12 inline-block uppercase font-bold"
             style={{ fontFamily: "'TAN Pearl', serif", textShadow: "0px 10px 30px rgba(0,0,0,0.05)" }}
           >
             Aurelia
           </h1>
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="mt-2 text-brand-btn"
+          >
+            <Sparkle className="w-6 h-6 fill-current" />
+          </motion.div>
         </div>
       </motion.div>
 
@@ -141,17 +154,23 @@ export default function HeroSection() {
               transition={{ duration: 0.5, ease: "easeInOut" }}
               className="flex flex-col space-y-4 min-h-[200px]"
             >
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-brand-heading leading-[1.1]">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-brand-heading leading-[1.1] uppercase">
                 {heroContent[currentImageIndex].titleLine1} <br />
                 <span className="text-brand-heading/90">{heroContent[currentImageIndex].titleLine2}</span>
               </h2>
+
+              <div className="flex flex-col space-y-2">
+                <Sparkle className="w-4 h-4 text-brand-btn fill-current" />
+                <div className="w-48 h-[1px] bg-brand-heading/20"></div>
+              </div>
+
               <p className="text-brand-body font-sans text-sm md:text-base leading-relaxed max-w-[280px]">
                 {heroContent[currentImageIndex].description}
               </p>
             </motion.div>
           </AnimatePresence>
-          <button className="flex items-center gap-3 bg-brand-btn text-brand-light rounded-full py-3.5 px-8 w-fit hover:bg-brand-btn-hover transition-colors group shadow-sm mt-4">
-            <span className="font-sans text-xs tracking-[0.15em] uppercase font-medium">Shop Now</span>
+          <button className="flex items-center gap-3 bg-[#3d2f25] text-brand-light rounded-sm py-4 px-10 w-fit hover:bg-brand-heading transition-colors group shadow-lg mt-8 uppercase tracking-[0.2em] font-sans text-[10px] font-bold">
+            <span>Shop Now</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={1.5} />
           </button>
         </motion.div>
@@ -161,8 +180,11 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-          className="relative h-[60vh] md:h-[80vh] w-full flex justify-center items-end order-first md:order-none z-10 -mt-16 md:mt-0"
+          className="relative h-[60vh] md:h-[75vh] w-full flex justify-center items-end order-first md:order-none z-10 -mt-16 md:mt-0 pt-10"
         >
+          {/* Arched Frame Background */}
+          <div className="absolute inset-x-0 bottom-30 top-10 bg-[#D9B35F]/30 rounded-t-full border border-white/40 shadow-inner z-0 pointer-events-none"></div>
+
           <motion.div
             ref={imageContainerRef}
             onMouseMove={handleMouseMove}
@@ -200,12 +222,20 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="flex flex-col justify-center pb-36 h-full space-y-4 md:self-center z-20"
+          className="flex flex-col justify-center pb-20 h-full space-y-6 md:self-center z-20 items-start md:items-end"
         >
-          <h3 className="text-2xl  md:text-3xl font-serif text-brand-heading md:text-right leading-snug tracking-wide uppercase">
-            A Celestial Touch <br />
-            For Timeless Moments
-          </h3>
+          <div className="flex flex-col md:items-end space-y-2">
+            <h3 className="text-xl md:text-2xl font-serif text-brand-heading md:text-right leading-snug tracking-[0.1em] uppercase opacity-80">
+              A Celestial Touch <br />
+              For Timeless Moments
+            </h3>
+
+            <div className="flex flex-col md:items-end space-y-0">
+              <Sparkle className="w-4 h-4 text-brand-btn fill-current" />
+              <div className="w-48 h-[1px] bg-brand-heading/20"></div>
+            </div>
+          </div>
+
           <CategoryMenu />
         </motion.div>
 
@@ -236,6 +266,24 @@ export default function HeroSection() {
         )}
       </AnimatePresence>
 
+      {/* Decorative Botanical Elements (Corner Leaves) */}
+      <div className="absolute top-0 right-260 w-200 h-94 opacity-80 pointer-events-none z-0 rotate-[-340deg]">
+        <Image
+          src="/images/leaf-gold.png"
+          alt="Decorative Leaf"
+          fill
+          className="object-contain"
+        />
+      </div>
+
+      <div className="absolute bottom-4 -right-25 lg-30 w-100 h-80 opacity-170 pointer-events-none z-0 rotate-[670deg] scale-x-[-1]">
+        <Image
+          src="/images/leaf-gold.png"
+          alt="Decorative Leaf"
+          fill
+          className="object-contain"
+        />
+      </div>
     </main>
   );
 }

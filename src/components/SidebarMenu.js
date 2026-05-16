@@ -88,7 +88,7 @@ export default function SidebarMenu({ isOpen, onClose }) {
             </div>
 
             {/* Content */}
-            <div className="flex-grow p-6 md:p-8 flex flex-col gap-8 pb-32">
+            <div className="flex-grow p-6 md:p-8 flex flex-col gap-8">
               {menuData.map((section, idx) => (
                 <div key={idx} className="flex flex-col gap-3">
                   <h3 className="text-sm font-sans tracking-[0.2em] text-brand-heading font-bold uppercase mb-2">
@@ -108,6 +108,24 @@ export default function SidebarMenu({ isOpen, onClose }) {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Account Footer */}
+            <div className="p-6 md:p-8 border-t border-brand-border bg-brand-hero/10 flex flex-col gap-4">
+              <Link 
+                href="/login" 
+                onClick={onClose}
+                className="w-full bg-brand-heading text-brand-light py-4 px-6 text-center text-xs font-sans font-bold uppercase tracking-[0.2em] hover:bg-black transition-colors rounded-sm shadow-md"
+              >
+                Sign In
+              </Link>
+              <Link 
+                href="/signup" 
+                onClick={onClose}
+                className="w-full border border-brand-heading text-brand-heading py-4 px-6 text-center text-xs font-sans font-bold uppercase tracking-[0.2em] hover:bg-brand-heading hover:text-brand-light transition-all rounded-sm"
+              >
+                Register
+              </Link>
             </div>
           </motion.div>
         </>

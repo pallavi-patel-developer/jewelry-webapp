@@ -1,0 +1,107 @@
+"use client";
+
+import Link from "next/link";
+import { ArrowLeft, Mail, Lock, User, Phone } from "lucide-react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+
+export default function SignupPage() {
+  return (
+    <div className="min-h-screen bg-brand-bg flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-hero/20 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-btn/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-md"
+      >
+        {/* Back Link */}
+        <Link href="/" className="flex items-center gap-2 text-brand-body hover:text-brand-heading transition-colors w-fit mb-12 group">
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span className="text-xs uppercase tracking-widest font-sans font-medium">Back to Home</span>
+        </Link>
+
+        {/* Signup Card */}
+        <div className="bg-white/40 backdrop-blur-md border border-white/50 rounded-sm p-10 shadow-2xl relative z-10">
+          <div className="text-center mb-10">
+            <h1 className="text-4xl font-serif text-brand-heading uppercase tracking-[0.2em] mb-3">JOIN AURELIA</h1>
+            <p className="text-xs text-brand-body uppercase tracking-widest font-medium opacity-60">Begin your journey of elegance</p>
+          </div>
+
+          <form className="flex flex-col gap-6">
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] uppercase tracking-widest text-brand-body font-bold">Full Name</label>
+              <div className="relative">
+                <User className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-body/40" strokeWidth={1.5} />
+                <input 
+                  type="text" 
+                  placeholder="Enter your name"
+                  className="w-full bg-transparent border-b border-brand-border py-3 pl-8 outline-none focus:border-brand-btn transition-colors font-sans text-brand-heading"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] uppercase tracking-widest text-brand-body font-bold">Email Address</label>
+              <div className="relative">
+                <Mail className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-body/40" strokeWidth={1.5} />
+                <input 
+                  type="email" 
+                  placeholder="name@example.com"
+                  className="w-full bg-transparent border-b border-brand-border py-3 pl-8 outline-none focus:border-brand-btn transition-colors font-sans text-brand-heading"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] uppercase tracking-widest text-brand-body font-bold">Mobile Number</label>
+              <div className="relative">
+                <Phone className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-body/40" strokeWidth={1.5} />
+                <input 
+                  type="tel" 
+                  placeholder="+91 ••••• •••••"
+                  className="w-full bg-transparent border-b border-brand-border py-3 pl-8 outline-none focus:border-brand-btn transition-colors font-sans text-brand-heading"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] uppercase tracking-widest text-brand-body font-bold">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-body/40" strokeWidth={1.5} />
+                <input 
+                  type="password" 
+                  placeholder="Create a strong password"
+                  className="w-full bg-transparent border-b border-brand-border py-3 pl-8 outline-none focus:border-brand-btn transition-colors font-sans text-brand-heading"
+                />
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 mt-2">
+              <input type="checkbox" id="terms" className="accent-brand-btn" />
+              <label htmlFor="terms" className="text-[10px] text-brand-body font-sans uppercase tracking-widest opacity-60">
+                I agree to the terms and conditions
+              </label>
+            </div>
+
+            <button className="bg-brand-heading text-brand-light w-full py-5 px-8 font-sans text-xs font-bold uppercase tracking-[0.3em] hover:bg-black transition-all mt-6 shadow-xl active:scale-[0.98] rounded-sm">
+              Create Account
+            </button>
+          </form>
+
+          <div className="mt-12 text-center">
+            <p className="text-xs text-brand-body font-sans">
+              Already a member?{" "}
+              <Link href="/login" className="text-brand-btn font-bold hover:text-brand-btn-hover underline underline-offset-4">
+                Sign In
+              </Link>
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}

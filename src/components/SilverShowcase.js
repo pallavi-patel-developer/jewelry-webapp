@@ -38,9 +38,9 @@ export default function SilverShowcase() {
   };
 
   return (
-    <div className="w-full px-4 md:px-10 pb-20 relative z-20 select-none">
+    <div className="w-full pb-20 relative z-20 select-none">
       {/* Container - Black Theme Background with Silver/Gold borders */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#121212] p-8 md:p-12 rounded-sm border border-white/10 shadow-[0_0_100px_20px_rgba(0,0,0,0.65)]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#121212] p-8 md:p-12 -mx-6 md:-mx-12 border-y border-white/10 shadow-[0_45px_100px_10px_rgba(0,0,0,0.75)]">
 
         {/* ─── LEFT PANEL: Text Description Block with Gold & Silver highlights ─── */}
         <div className="lg:col-span-4 flex flex-col items-start text-left">
@@ -70,8 +70,8 @@ export default function SilverShowcase() {
               onClick={handlePrev}
               disabled={startIndex === 0}
               className={`w-10 h-10 rounded-sm flex items-center justify-center transition-all border ${startIndex === 0
-                  ? "bg-[#1E1E1E] text-white/20 border-white/5 cursor-not-allowed"
-                  : "bg-black text-[#D4AF37] border-white/10 hover:bg-[#D4AF37] hover:text-black shadow-md"
+                ? "bg-[#1E1E1E] text-white/20 border-white/5 cursor-not-allowed"
+                : "bg-black text-[#D4AF37] border-white/10 hover:bg-[#D4AF37] hover:text-black shadow-md"
                 }`}
               aria-label="Previous items"
             >
@@ -81,8 +81,8 @@ export default function SilverShowcase() {
               onClick={handleNext}
               disabled={startIndex + 2 >= silverProducts.length}
               className={`w-10 h-10 rounded-sm flex items-center justify-center transition-all border ${startIndex + 2 >= silverProducts.length
-                  ? "bg-[#1E1E1E] text-white/20 border-white/5 cursor-not-allowed"
-                  : "bg-black text-[#D4AF37] border-white/10 hover:bg-[#D4AF37] hover:text-black shadow-md"
+                ? "bg-[#1E1E1E] text-white/20 border-white/5 cursor-not-allowed"
+                : "bg-black text-[#D4AF37] border-white/10 hover:bg-[#D4AF37] hover:text-black shadow-md"
                 }`}
               aria-label="Next items"
             >

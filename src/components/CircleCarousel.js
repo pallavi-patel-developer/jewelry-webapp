@@ -61,11 +61,11 @@ export default function CircleCarousel() {
   const activeProduct = products[activeIndex];
 
   return (
-    <div className="w-full px-4 md:px-10 pb-12 relative z-20 overflow-hidden select-none">
+    <div className="w-full pb-12 relative z-20 overflow-hidden select-none">
       {/* Outer Editorial Container with Wheel Listener (Upscaled height: h-[80vh] md:h-[90vh]) */}
       <div
         onWheel={handleWheel}
-        className="relative w-full h-[75vh] md:h-[90vh] bg-[#FAF6F0] rounded-sm border border-brand-border/30 shadow-md flex items-center overflow-hidden"
+        className="relative w-auto -mx-6 md:-mx-12 h-[75vh] md:h-[90vh] bg-[#FAF6F0] border-y border-brand-border/30 shadow-md flex items-center overflow-hidden"
       >
 
         {/* ─── LEFT: Massive Curved Brand Shield (Center of Wheel - Upscaled dimension) ─── */}

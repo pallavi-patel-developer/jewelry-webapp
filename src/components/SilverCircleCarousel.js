@@ -72,18 +72,18 @@ export default function SilverCircleCarousel() {
   const activeProduct = silverProducts[activeIndex];
 
   return (
-    <div className="w-full pb-16 relative z-20 overflow-hidden select-none">
-      {/* Outer Editorial Container - Dark Theme (h-[75vh] md:h-[90vh]) - Full Screen Bleed */}
+    <div className="w-full pb-16 relative z-20 overflow-visible select-none">
+      {/* Outer Editorial Container - Dark Theme (h-[75vh] md:h-[90vh]) */}
       <div
         onWheel={handleWheel}
-        className="relative w-full h-[75vh] md:h-[90vh] bg-[#121212] border-y border-white/10 shadow-2xl flex items-center overflow-hidden"
+        className="relative w-auto -mx-6 md:-mx-12 h-[75vh] md:h-[90vh] bg-[#121212] border-y border-white/10 shadow-[-60px_0_150px_20px_rgba(0,0,0,0.85)] flex items-center overflow-hidden"
       >
 
         {/* ─── RIGHT: Massive Curved Brand Shield (Center of Wheel on RIGHT) ─── */}
         <div
           className="absolute -right-[40vh] md:-right-[50vh] w-[90vh] md:w-[115vh] h-[90vh] md:h-[115vh] rounded-full bg-[#1C1C1C] text-white flex items-center justify-start pl-20 md:pl-40 z-30 shadow-2xl transition-all duration-500 border border-white/5"
           style={{
-            boxShadow: "-15px 0px 50px rgba(0,0,0,0.4)",
+            boxShadow: "-40px 0px 120px 10px rgba(0,0,0,0.7)",
           }}
         >
           {/* Inner Text Brand block (Mirrored layout, Left-aligned) */}
@@ -207,7 +207,7 @@ export default function SilverCircleCarousel() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 50 }}
               transition={{ duration: 0.55, ease: "easeOut" }}
-              className="flex flex-col text-left p-8 md:p-10 bg-[#1A1A1A]/80 backdrop-blur-md rounded-sm border border-white/10 shadow-2xl text-white"
+              className="flex flex-col text-left p-8 md:p-10 bg-[#1A1A1A]/80 backdrop-blur-md rounded-sm border border-white/10 shadow-[0_0_80px_10px_rgba(0,0,0,0.85)] text-white"
             >
               <div className="flex items-center gap-2.5 mb-3">
                 <span className="font-sans text-[10px] tracking-[0.25em] text-brand-btn uppercase font-bold">

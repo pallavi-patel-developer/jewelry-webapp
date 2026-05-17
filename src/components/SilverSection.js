@@ -24,7 +24,7 @@ export default function SilverSection() {
   ];
 
   return (
-    <div className="w-full px-4 md:px-10 pb-24 relative z-20 overflow-visible select-none">
+    <div className="w-full pb-24 relative z-20 overflow-visible select-none">
 
       {/* ─── BOTTOM SUB-LABEL: AURELIA TOP SILVER STYLE (Centered, Black, same size/font) ─── */}
       <div className="text-center mt-12 px-4">
@@ -35,7 +35,7 @@ export default function SilverSection() {
       </div>
 
       {/* ─── MAIN BANNER BOX ─── */}
-      <div className="relative w-full h-[55vh] md:h-[65vh] rounded-sm overflow-hidden border border-brand-border/20 shadow-[0_0_100px_20px_rgba(0,0,0,0.65)] bg-black">
+      <div className="relative w-auto -mx-6 md:-mx-12 h-[55vh] md:h-[65vh] overflow-hidden border-y border-brand-border/50 shadow-[0_45px_100px_10px_rgba(0,0,0,0.75)] bg-black">
 
         {/* Background Moody Silver Rings Image */}
         <div className="absolute inset-0 z-0">

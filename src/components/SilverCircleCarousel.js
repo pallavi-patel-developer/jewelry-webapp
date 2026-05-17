@@ -11,6 +11,8 @@ export default function SilverCircleCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [radius, setRadius] = useState(540);
   const wheelTimeout = useRef(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHoveringCard, setIsHoveringCard] = useState(false);
 
   // Filter products for Silver Collection (White Gold, Platinum, or silver-colored)
   const silverProducts = products.filter(
@@ -93,6 +95,7 @@ export default function SilverCircleCarousel() {
       {/* Outer Editorial Container - Dark Theme (h-[75vh] md:h-[90vh]) */}
       <div
         ref={containerRef}
+        onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
         className="relative w-full h-[75vh] md:h-[90vh] bg-[#121212] border-y border-white/10 shadow-[-60px_0_150px_20px_rgba(0,0,0,0.85)] flex items-center overflow-visible"
       >
 
@@ -184,7 +187,7 @@ export default function SilverCircleCarousel() {
               return (
                 <div
                   key={product.id}
-                  className="product-card-trigger absolute top-1/2 right-0 -translate-y-1/2 pointer-events-auto cursor-ns-resize select-none origin-right"
+                  className="product-card-trigger absolute top-1/2 right-0 -translate-y-1/2 pointer-events-auto cursor-none select-none origin-right"
                   style={{
                     transform: `translateY(-50%) rotate(${-angle}deg) translateX(${-radius}px) rotate(${angle}deg)`,
                     opacity: isVisible ? 1 : 0,
@@ -193,6 +196,8 @@ export default function SilverCircleCarousel() {
                     transition: "transform 0.85s cubic-bezier(0.25, 1, 0.28, 1), opacity 0.85s, visibility 0.85s",
                   }}
                   onClick={() => setActiveIndex(index)}
+                  onMouseEnter={() => setIsHoveringCard(true)}
+                  onMouseLeave={() => setIsHoveringCard(false)}
                 >
                   <div className="block group">
                     {/* Curved/Arched Luxury Card (Upscaled width: w-[160px] md:w-[260px] with mirrored borders) */}
@@ -275,6 +280,22 @@ export default function SilverCircleCarousel() {
         </div>
 
       </div>
+
+      {/* ─── CUSTOM MOUSE FOLLOWER BADGE: Matches reference image exactly ─── */}
+      {isHoveringCard && (
+        <div
+          className="hidden md:flex fixed pointer-events-none z-50 items-center justify-center rounded-full bg-[#736357] text-[#FAF6F0] w-[84px] h-[84px] shadow-2xl -translate-x-1/2 -translate-y-1/2 select-none border border-[#FAF6F0]/20"
+          style={{
+            left: mousePos.x,
+            top: mousePos.y,
+            transition: "left 0.05s ease-out, top 0.05s ease-out",
+          }}
+        >
+          <span className="font-serif text-[10px] tracking-[0.25em] uppercase font-bold text-center leading-none mt-0.5">
+            SCROLL
+          </span>
+        </div>
+      )}
     </div>
   );
 }

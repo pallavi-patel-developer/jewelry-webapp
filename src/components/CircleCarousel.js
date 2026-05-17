@@ -11,6 +11,8 @@ export default function CircleCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [radius, setRadius] = useState(540);
   const wheelTimeout = useRef(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHoveringCard, setIsHoveringCard] = useState(false);
 
   // Responsive radius calculation (upscaled sizes)
   useEffect(() => {
@@ -40,11 +42,11 @@ export default function CircleCarousel() {
       const isOverCard = e.target.closest('.product-card-trigger');
       if (!isOverCard) return; // Allow natural page scroll if not over cards!
 
+      // Force block global browser scrolling immediately!
+      e.preventDefault();
+
       // If scroll distance is tiny, let it go
       if (Math.abs(e.deltaY) < 15) return;
-
-      // Force block global browser scrolling
-      e.preventDefault();
 
       if (wheelTimeout.current) return;
 
@@ -82,6 +84,7 @@ export default function CircleCarousel() {
       {/* Outer Editorial Container with Wheel Listener (Upscaled height: h-[80vh] md:h-[90vh]) */}
       <div
         ref={containerRef}
+        onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
         className="relative w-full h-[75vh] md:h-[90vh] bg-[#FAF6F0] border-y border-brand-border/30 shadow-[0_35px_90px_10px_rgba(0,0,0,0.22)] flex items-center overflow-visible"
       >
 
@@ -170,6 +173,8 @@ export default function CircleCarousel() {
                       transition: "transform 0.85s cubic-bezier(0.25, 1, 0.28, 1), opacity 0.85s, visibility 0.85s",
                     }}
                     onClick={() => setActiveIndex(index)}
+                    onMouseEnter={() => setIsHoveringCard(true)}
+                    onMouseLeave={() => setIsHoveringCard(false)}
                   >
                     <div className="block group">
                       {/* Curved/Arched Luxury Card (Upscaled width: w-[160px] md:w-[260px]) */}
@@ -252,6 +257,22 @@ export default function CircleCarousel() {
         </div>
 
       </div>
+
+      {/* ─── CUSTOM MOUSE FOLLOWER BADGE: Matches reference image exactly ─── */}
+      {isHoveringCard && (
+        <div
+          className="hidden md:flex fixed pointer-events-none z-50 items-center justify-center rounded-full bg-[#736357] text-[#FAF6F0] w-[84px] h-[84px] shadow-2xl -translate-x-1/2 -translate-y-1/2 select-none border border-[#FAF6F0]/20"
+          style={{
+            left: mousePos.x,
+            top: mousePos.y,
+            transition: "left 0.05s ease-out, top 0.05s ease-out",
+          }}
+        >
+          <span className="font-serif text-[10px] tracking-[0.25em] uppercase font-bold text-center leading-none mt-0.5">
+            SCROLL
+          </span>
+        </div>
+      )}
     </div>
   );
 }

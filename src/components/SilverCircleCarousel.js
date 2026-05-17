@@ -39,6 +39,44 @@ export default function SilverCircleCarousel() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const containerRef = useRef(null);
+
+  // Active non-passive wheel scroll listener to block global page scroll
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleWheelActive = (e) => {
+      // Check if mouse is over a product card
+      const isOverCard = e.target.closest('.product-card-trigger');
+      if (!isOverCard) return; // Allow natural page scroll if not over cards!
+
+      // If scroll distance is tiny, let it go
+      if (Math.abs(e.deltaY) < 15) return;
+
+      // Force block global browser scrolling
+      e.preventDefault();
+
+      if (wheelTimeout.current) return;
+
+      if (e.deltaY > 0) {
+        setActiveIndex((prev) => (prev + 1) % silverProducts.length);
+      } else {
+        setActiveIndex((prev) => (prev - 1 + silverProducts.length) % silverProducts.length);
+      }
+
+      wheelTimeout.current = true;
+      setTimeout(() => {
+        wheelTimeout.current = false;
+      }, 450); // 450ms debounce
+    };
+
+    container.addEventListener("wheel", handleWheelActive, { passive: false });
+    return () => {
+      container.removeEventListener("wheel", handleWheelActive);
+    };
+  }, [silverProducts.length]);
+
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % silverProducts.length);
   };
@@ -47,37 +85,19 @@ export default function SilverCircleCarousel() {
     setActiveIndex((prev) => (prev - 1 + silverProducts.length) % silverProducts.length);
   };
 
-  // Scroll handler for Carousel Rotation
-  const handleWheel = (e) => {
-    if (Math.abs(e.deltaY) < 20) return;
-
-    // Prevent default body scrolling while interacting with carousel
-    e.preventDefault();
-
-    if (wheelTimeout.current) return;
-
-    if (e.deltaY > 0) {
-      handleNext();
-    } else {
-      handlePrev();
-    }
-
-    wheelTimeout.current = true;
-    setTimeout(() => {
-      wheelTimeout.current = false;
-    }, 450);
-  };
-
   // Active product reference
   const activeProduct = silverProducts[activeIndex];
 
   return (
-    <div className="w-full pb-16 relative z-20 overflow-visible select-none">
+    <div className="w-auto -mx-6 md:-mx-12 pb-16 relative z-20 overflow-visible select-none">
       {/* Outer Editorial Container - Dark Theme (h-[75vh] md:h-[90vh]) */}
       <div
-        onWheel={handleWheel}
-        className="relative w-auto -mx-6 md:-mx-12 h-[75vh] md:h-[90vh] bg-[#121212] border-y border-white/10 shadow-[-60px_0_150px_20px_rgba(0,0,0,0.85)] flex items-center overflow-hidden"
+        ref={containerRef}
+        className="relative w-full h-[75vh] md:h-[90vh] bg-[#121212] border-y border-white/10 shadow-[-60px_0_150px_20px_rgba(0,0,0,0.85)] flex items-center overflow-visible"
       >
+
+        {/* ─── CLIPPING VIEWPORT: Prevents items from spilling outside the dark section ─── */}
+        <div className="absolute inset-0 overflow-hidden rounded-none z-10">
 
         {/* ─── RIGHT: Massive Curved Brand Shield (Center of Wheel on RIGHT) ─── */}
         <div
@@ -164,7 +184,7 @@ export default function SilverCircleCarousel() {
               return (
                 <div
                   key={product.id}
-                  className="absolute top-1/2 right-0 -translate-y-1/2 pointer-events-auto cursor-pointer select-none origin-right"
+                  className="product-card-trigger absolute top-1/2 right-0 -translate-y-1/2 pointer-events-auto cursor-ns-resize select-none origin-right"
                   style={{
                     transform: `translateY(-50%) rotate(${-angle}deg) translateX(${-radius}px) rotate(${angle}deg)`,
                     opacity: isVisible ? 1 : 0,
@@ -197,6 +217,8 @@ export default function SilverCircleCarousel() {
             })}
           </div>
         </div>
+
+        </div> {/* ─── END OF CLIPPING VIEWPORT ─── */}
 
         {/* ─── LEFT: Active Product Description panel (Dynamic changes - Sits on LEFT) ─── */}
         <div className="absolute left-6 md:left-16 lg:left-24 top-1/2 -translate-y-1/2 z-30 w-full max-w-[280px] md:max-w-[380px] pointer-events-auto">

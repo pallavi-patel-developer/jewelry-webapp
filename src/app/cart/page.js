@@ -31,12 +31,12 @@ export default function CartPage() {
       <main className="flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-12 py-12 md:py-20">
         <div className="flex flex-col gap-10">
           {/* Header */}
-          <div className="flex flex-col gap-4 border-b border-brand-border pb-10">
-            <Link href="/home" className="flex items-center gap-2 text-brand-body hover:text-brand-heading transition-colors w-fit group">
+          <div className="flex flex-col gap-4 border-b border-black pb-10">
+            <Link href="/home" className="flex items-center gap-2 text-black/60 hover:text-black transition-colors w-fit group font-bold">
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               <span className="text-xs uppercase tracking-widest font-sans font-medium">Back to Shopping</span>
             </Link>
-            <h1 className="text-4xl md:text-5xl font-serif text-brand-heading uppercase tracking-widest">
+            <h1 className="text-4xl md:text-5xl font-serif text-black uppercase tracking-widest font-bold">
               Your Shopping Bag
             </h1>
           </div>
@@ -46,9 +46,9 @@ export default function CartPage() {
             <div className="lg:col-span-2 flex flex-col gap-8">
               {dummyCartItems.length > 0 ? (
                 dummyCartItems.map((item) => (
-                  <div key={item.id} className="flex flex-col sm:flex-row gap-6 p-6 bg-white/40 backdrop-blur-sm rounded-sm border border-brand-border/30">
+                  <div key={item.id} className="flex flex-col sm:flex-row gap-6 p-6 bg-white/80 backdrop-blur-sm rounded-sm border border-black shadow-md hover:shadow-lg transition-all duration-300">
                     {/* Item Image */}
-                    <div className="relative w-full sm:w-40 aspect-square bg-brand-hero/50 rounded-sm overflow-hidden flex items-center justify-center p-4">
+                    <div className="relative w-full sm:w-40 aspect-square bg-black/5 rounded-sm overflow-hidden flex items-center justify-center p-4 border border-black/10">
                       <Image
                         src={item.image}
                         alt={item.name}
@@ -62,25 +62,25 @@ export default function CartPage() {
                     <div className="flex flex-col flex-grow justify-between py-2">
                       <div className="flex justify-between items-start">
                         <div className="flex flex-col gap-1">
-                          <h3 className="font-serif text-xl text-brand-heading uppercase tracking-wide">
+                          <h3 className="font-serif text-xl text-black uppercase tracking-wide font-bold">
                             {item.name}
                           </h3>
-                          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-widest font-sans text-brand-body/70">
+                          <div className="flex flex-wrap gap-x-4 gap-y-1 text-[10px] uppercase tracking-widest font-sans text-black/60 font-semibold">
                             <span>SKU: {item.sku}</span>
                             <span>Metal: {item.metal}</span>
                           </div>
-                          <p className="text-brand-body text-sm font-sans mt-1">
-                            Size: <span className="font-semibold">{item.selectedSize}</span>
+                          <p className="text-black text-sm font-sans mt-1 font-medium">
+                            Size: <span className="font-bold text-black">{item.selectedSize}</span>
                           </p>
                         </div>
                         <div className="flex gap-2">
-                          <button className="text-brand-body/40 hover:text-brand-heading transition-colors p-2" title="Save for Later">
+                          <button className="text-black/40 hover:text-black transition-colors p-2" title="Save for Later">
                             <Bookmark className="w-4 h-4" strokeWidth={1.5} />
                           </button>
-                          <button className="text-brand-body/40 hover:text-brand-heading transition-colors p-2" title="Move to Wishlist">
+                          <button className="text-black/40 hover:text-black transition-colors p-2" title="Move to Wishlist">
                             <Heart className="w-4 h-4" strokeWidth={1.5} />
                           </button>
-                          <button className="text-brand-body/40 hover:text-red-800 transition-colors p-2" title="Remove">
+                          <button className="text-black/40 hover:text-red-800 transition-colors p-2" title="Remove">
                             <Trash2 className="w-4 h-4" strokeWidth={1.5} />
                           </button>
                         </div>
@@ -88,21 +88,21 @@ export default function CartPage() {
 
                       <div className="flex justify-between items-center mt-6">
                         {/* Quantity Selector */}
-                        <div className="flex items-center border border-brand-border rounded-sm">
-                          <button className="p-2 hover:bg-brand-border/20 transition-colors">
-                            <Minus className="w-4 h-4 text-brand-heading" />
+                        <div className="flex items-center border border-black rounded-sm">
+                          <button className="p-2 hover:bg-black/10 transition-colors">
+                            <Minus className="w-4 h-4 text-black" />
                           </button>
-                          <span className="px-4 font-sans text-sm text-brand-heading font-medium">
+                          <span className="px-4 font-sans text-sm text-black font-bold">
                             {item.quantity}
                           </span>
-                          <button className="p-2 hover:bg-brand-border/20 transition-colors">
-                            <Plus className="w-4 h-4 text-brand-heading" />
+                          <button className="p-2 hover:bg-black/10 transition-colors">
+                            <Plus className="w-4 h-4 text-black" />
                           </button>
                         </div>
 
                         {/* Price */}
                         <div className="flex flex-col items-end">
-                          <span className="text-lg font-sans text-brand-heading font-medium">
+                          <span className="text-lg font-sans text-black font-bold">
                             {item.discountedPrice}
                           </span>
                         </div>
@@ -111,9 +111,9 @@ export default function CartPage() {
                   </div>
                 ))
               ) : (
-                <div className="text-center py-20 bg-white/20 rounded-sm border border-dashed border-brand-border">
-                  <p className="text-brand-body font-serif text-xl mb-6 italic">Your bag is currently empty.</p>
-                  <Link href="/" className="bg-brand-btn text-brand-light px-8 py-4 uppercase tracking-[0.2em] text-xs font-sans hover:bg-brand-btn-hover transition-colors rounded-sm inline-block">
+                <div className="text-center py-20 bg-white/60 rounded-sm border border-dashed border-black shadow-md">
+                  <p className="text-black font-serif text-xl mb-6 italic font-medium">Your bag is currently empty.</p>
+                  <Link href="/" className="bg-black text-[#FAF6F0] px-8 py-4 uppercase tracking-[0.2em] text-xs font-sans hover:bg-[#736357] transition-colors rounded-sm inline-block font-bold shadow-md">
                     Start Shopping
                   </Link>
                 </div>
@@ -122,31 +122,31 @@ export default function CartPage() {
 
             {/* Order Summary Sidebar */}
             <div className="lg:col-span-1">
-              <div className="bg-brand-heading text-brand-light p-10 rounded-sm shadow-xl flex flex-col gap-8 sticky top-32">
-                <h2 className="text-2xl font-serif uppercase tracking-[0.2em] border-b border-white/10 pb-6">
+              <div className="bg-black text-[#FAF6F0] p-10 rounded-sm shadow-2xl flex flex-col gap-8 sticky top-32 border border-black">
+                <h2 className="text-2xl font-serif uppercase tracking-[0.2em] border-b border-white/10 pb-6 font-bold text-white">
                   Summary
                 </h2>
 
                 <div className="flex flex-col gap-4 font-sans text-sm tracking-wide">
-                  <div className="flex justify-between opacity-80">
+                  <div className="flex justify-between opacity-80 font-medium">
                     <span>Subtotal</span>
-                    <span>₹{subtotal.toLocaleString()}</span>
+                    <span className="font-bold">₹{subtotal.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between opacity-80">
+                  <div className="flex justify-between opacity-80 font-medium">
                     <span>Shipping</span>
-                    <span>{shipping === 0 ? "Complimentary" : `₹${shipping}`}</span>
+                    <span className="font-bold text-green-400">{shipping === 0 ? "Complimentary" : `₹${shipping}`}</span>
                   </div>
-                  <div className="flex justify-between opacity-80">
+                  <div className="flex justify-between opacity-80 font-medium">
                     <span>Estimated GST (3%)</span>
-                    <span>₹{estimatedTax.toLocaleString()}</span>
+                    <span className="font-bold">₹{estimatedTax.toLocaleString()}</span>
                   </div>
-                  <div className="flex justify-between text-xl font-serif border-t border-white/10 pt-6 mt-2 uppercase tracking-[0.1em]">
+                  <div className="flex justify-between text-xl font-serif border-t border-white/10 pt-6 mt-2 uppercase tracking-[0.1em] font-bold text-white">
                     <span>Total</span>
-                    <span className="font-sans">₹{total.toLocaleString()}</span>
+                    <span className="font-sans font-bold">₹{total.toLocaleString()}</span>
                   </div>
                 </div>
 
-                <button className="w-full bg-brand-light text-brand-heading py-5 px-8 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white transition-colors mt-4 rounded-sm">
+                <button className="w-full bg-[#FAF6F0] text-black py-5 px-8 font-sans text-xs font-bold uppercase tracking-[0.2em] hover:bg-white hover:scale-[1.02] transition-all duration-300 mt-4 rounded-sm shadow-lg">
                   Proceed to Checkout
                 </button>
 

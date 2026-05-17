@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import ProductGrid from "@/components/ProductGrid";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "For Him | Aurelia Jewelry",
@@ -26,6 +27,7 @@ export default function Page() {
       <main className="flex-grow">
         <ProductGrid title="Explore The Collection" />
       </main>
+      <Footer />
     </div>
   );
 }

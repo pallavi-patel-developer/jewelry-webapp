@@ -51,32 +51,32 @@ export default function OrdersPage() {
   return (
     <div className="flex flex-col gap-10 animate-in fade-in duration-700">
       <div className="flex flex-col gap-2">
-        <h2 className="text-3xl font-serif text-brand-heading uppercase tracking-widest">My Orders</h2>
-        <p className="text-brand-body text-sm font-sans">
+        <h2 className="text-3xl font-serif text-black uppercase tracking-widest font-bold">My Orders</h2>
+        <p className="text-black/75 text-sm font-sans font-medium">
           Track your orders and view your purchase history.
         </p>
       </div>
 
       <div className="flex flex-col gap-8">
         {orders.map((order) => (
-          <div key={order.id} className="border border-brand-border/30 rounded-sm overflow-hidden bg-white/20">
+          <div key={order.id} className="border border-black rounded-sm overflow-hidden bg-white/20 shadow-md">
             {/* Order Header */}
-            <div className="bg-brand-hero/10 p-6 flex flex-wrap gap-6 justify-between items-center border-b border-brand-border/30">
+            <div className="bg-black/5 p-6 flex flex-wrap gap-6 justify-between items-center border-b border-black/20">
               <div className="flex flex-wrap gap-x-10 gap-y-4">
                 <div className="flex flex-col gap-1">
-                  <span className="text-[10px] uppercase tracking-widest text-brand-body/60 font-bold">Order ID</span>
-                  <span className="text-sm font-sans font-bold text-brand-heading">#{order.id}</span>
+                  <span className="text-[10px] uppercase tracking-widest text-black/60 font-bold">Order ID</span>
+                  <span className="text-sm font-sans font-bold text-black">#{order.id}</span>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <span className="text-[10px] uppercase tracking-widest text-brand-body/60 font-bold">Date</span>
-                  <span className="text-sm font-sans text-brand-heading">{order.date}</span>
+                  <span className="text-[10px] uppercase tracking-widest text-black/60 font-bold">Date</span>
+                  <span className="text-sm font-sans text-black font-medium">{order.date}</span>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <span className="text-[10px] uppercase tracking-widest text-brand-body/60 font-bold">Payment</span>
-                  <span className="text-sm font-sans text-brand-heading">{order.payment}</span>
+                  <span className="text-[10px] uppercase tracking-widest text-black/60 font-bold">Payment</span>
+                  <span className="text-sm font-sans text-black font-medium">{order.payment}</span>
                 </div>
                 <div className="flex flex-col gap-1">
-                  <span className="text-[10px] uppercase tracking-widest text-brand-body/60 font-bold">Status</span>
+                  <span className="text-[10px] uppercase tracking-widest text-black/60 font-bold">Status</span>
                   <span className={`text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-tighter w-fit ${
                     order.status === "Delivered" ? "bg-green-100 text-green-800" : "bg-blue-100 text-blue-800"
                   }`}>
@@ -86,33 +86,33 @@ export default function OrdersPage() {
               </div>
               
               <div className="flex gap-4">
-                <button className="flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-widest text-brand-btn hover:text-brand-btn-hover transition-colors">
+                <button className="flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-widest text-black hover:text-[#736357] transition-colors">
                   <Download className="w-3 h-3" /> Invoice
                 </button>
               </div>
             </div>
 
             {/* Order Content */}
-            <div className="p-6 flex flex-col md:flex-row gap-8 justify-between items-center border-b border-brand-border/10">
+            <div className="p-6 flex flex-col md:flex-row gap-8 justify-between items-center border-b border-black/10">
               <div className="flex flex-col gap-6 w-full">
                 {order.items.map((item, idx) => (
                   <div key={idx} className="flex gap-4 items-center">
-                    <div className="relative w-16 h-16 bg-brand-hero/20 rounded-sm overflow-hidden flex items-center justify-center p-2">
+                    <div className="relative w-16 h-16 bg-black/5 rounded-sm overflow-hidden flex items-center justify-center p-2 border border-black/10">
                       <Image src={item.image} alt={item.name} fill className="object-contain p-2" style={{ mixBlendMode: "multiply" }} />
                     </div>
                     <div className="flex flex-col gap-0.5">
-                      <span className="text-sm font-serif text-brand-heading uppercase tracking-wide">{item.name}</span>
-                      <span className="text-xs text-brand-body font-sans">{item.price}</span>
+                      <span className="text-sm font-serif text-black uppercase tracking-wide font-semibold">{item.name}</span>
+                      <span className="text-xs text-black/60 font-sans font-medium">{item.price}</span>
                     </div>
                   </div>
                 ))}
               </div>
 
               <div className="flex flex-col items-end gap-2 w-full md:w-auto">
-                <span className="text-xl font-sans font-bold text-brand-heading">{order.total}</span>
+                <span className="text-xl font-sans font-bold text-black">{order.total}</span>
                 <button 
                   onClick={() => toggleOrder(order.id)}
-                  className="flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-[0.2em] text-brand-btn hover:text-brand-btn-hover transition-colors group"
+                  className="flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-[0.2em] text-black hover:text-[#736357] transition-colors group"
                 >
                   Track Your Order 
                   {expandedOrder === order.id ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}

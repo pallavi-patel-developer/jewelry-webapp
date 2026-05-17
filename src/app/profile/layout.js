@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
@@ -47,8 +48,8 @@ export default function ProfileLayout({ children }) {
                     href={link.href}
                     className={`flex items-center gap-4 px-4 py-3 rounded-sm transition-all duration-300 font-sans text-sm tracking-wide ${
                       isActive 
-                      ? "bg-brand-heading text-brand-light shadow-md" 
-                      : "text-brand-heading hover:bg-brand-border/30"
+                      ? "bg-black text-[#FAF6F0] shadow-xl font-bold translate-x-1" 
+                      : "text-black hover:bg-black/5 font-semibold"
                     }`}
                   >
                     <Icon className="w-4 h-4" strokeWidth={isActive ? 2 : 1.5} />
@@ -57,7 +58,7 @@ export default function ProfileLayout({ children }) {
                 );
               })}
               
-              <button className="flex items-center gap-4 px-4 py-3 mt-4 rounded-sm transition-all duration-300 font-sans text-sm tracking-wide text-red-700 hover:bg-red-50">
+              <button className="flex items-center gap-4 px-4 py-3 mt-4 rounded-sm transition-all duration-300 font-sans text-sm tracking-wide text-red-700 hover:bg-black hover:text-red-400 font-semibold shadow-sm border border-transparent hover:border-red-900/30">
                 <LogOut className="w-4 h-4" strokeWidth={1.5} />
                 Logout
               </button>
@@ -65,11 +66,12 @@ export default function ProfileLayout({ children }) {
           </aside>
 
           {/* Content Area */}
-          <div className="flex-grow min-h-[60vh] bg-white/40 backdrop-blur-sm rounded-sm border border-brand-border/30 p-8 md:p-12 shadow-sm">
+          <div className="flex-grow min-h-[60vh] bg-white/70 backdrop-blur-md rounded-sm border border-black p-8 md:p-12 shadow-2xl">
             {children}
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

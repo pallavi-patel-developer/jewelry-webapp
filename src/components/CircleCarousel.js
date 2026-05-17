@@ -164,7 +164,7 @@ export default function CircleCarousel() {
                 return (
                   <div
                     key={product.id}
-                    className="product-card-trigger absolute top-1/2 left-0 -translate-y-1/2 pointer-events-auto cursor-ns-resize select-none origin-left"
+                    className="product-card-trigger absolute top-1/2 left-0 -translate-y-1/2 pointer-events-auto cursor-none select-none origin-left"
                     style={{
                       transform: `translateY(-50%) rotate(${angle}deg) translateX(${radius}px) rotate(${-angle}deg)`,
                       opacity: isVisible ? 1 : 0,

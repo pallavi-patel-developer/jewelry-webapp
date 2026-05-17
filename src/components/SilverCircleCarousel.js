@@ -53,11 +53,11 @@ export default function SilverCircleCarousel() {
       const isOverCard = e.target.closest('.product-card-trigger');
       if (!isOverCard) return; // Allow natural page scroll if not over cards!
 
+      // Force block global browser scrolling immediately!
+      e.preventDefault();
+
       // If scroll distance is tiny, let it go
       if (Math.abs(e.deltaY) < 15) return;
-
-      // Force block global browser scrolling
-      e.preventDefault();
 
       if (wheelTimeout.current) return;
 

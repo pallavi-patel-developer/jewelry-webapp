@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-brand-bg: #D9B35F;
-  --color-brand-hero: #D9B35F;
+  --color-brand-bg: #F5EDE0;
+  --color-brand-hero: #F5EDE0;
   --color-brand-card: #ffffff;
   --color-brand-btn: #b88d5b;
   --color-brand-btn-hover: #9c754a;

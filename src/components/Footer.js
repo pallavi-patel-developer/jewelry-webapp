@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, ArrowRight, Sparkles } from "lucide-react";
+import { Mail, ArrowRight, Sparkles, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
   const socialLinks = [
@@ -37,29 +37,30 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-b from-black via-[#15110d] to-black border-t border-[#D4AF37]/20 text-white relative z-20 overflow-hidden select-none">
+    <footer className="bg-gradient-to-b from-[#2b1810] via-[#1c0f0a] to-[#2b1810] border-t-2 border-[#D4AF37]/60 text-white relative z-20 overflow-hidden select-none">
       
       {/* Decorative Golden Ambient Light */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[150px] bg-[#D4AF37]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[500px] h-[150px] bg-[#D4AF37]/10 rounded-full blur-[100px] pointer-events-none" />
 
       {/* ─── MAIN FOOTER CONTENT ─── */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 pt-16 pb-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-white/10">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 pt-16 pb-8 relative z-10">
+        
+        {/* ROW 1: 5-Column Grid for Links & Brand */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-8 pb-12 border-b border-white/10">
           
-          {/* Column 1: Brand details (4 cols) */}
-          <div className="lg:col-span-4 flex flex-col items-start">
+          {/* 1. Brand Info (span 4) */}
+          <div className="col-span-2 lg:col-span-4 flex flex-col items-start text-left">
             <Link href="/home" className="flex items-center gap-2 mb-6 group">
-              <span className="font-serif text-3xl tracking-[0.2em] text-[#D4AF37] font-bold uppercase transition-all duration-300 group-hover:text-white">
+              <span className="font-serif text-2xl md:text-3xl tracking-[0.2em] text-[#D4AF37] font-bold uppercase transition-all duration-300 group-hover:text-[#FAF6F0]">
                 AURELIA
               </span>
               <Sparkles className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37] animate-pulse" />
             </Link>
-
-            <p className="font-sans text-xs text-white/60 leading-relaxed mb-6 max-w-[320px]">
+            <p className="font-sans text-xs text-[#FAF6F0]/65 leading-relaxed mb-6 max-w-[340px]">
               A celestial touch for timeless moments. Designing pure perfection in gold, silver, and diamonds. Each piece is handcrafted to carry a story of grace and luxury.
             </p>
-
-            {/* Social Icons with Gold circular outline using inline SVGs */}
+            
+            {/* 8. Social Media */}
             <div className="flex gap-4">
               {socialLinks.map((social, idx) => (
                 <a
@@ -67,7 +68,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-9 h-9 rounded-full border border-[#D4AF37]/20 flex items-center justify-center text-white/70 hover:text-black hover:bg-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300 shadow-md"
+                  className="w-9 h-9 rounded-full border border-[#D4AF37]/20 flex items-center justify-center text-[#FAF6F0]/70 hover:text-[#2b1810] hover:bg-[#D4AF37] hover:border-[#D4AF37] transition-all duration-300 shadow-md"
                   title={social.name}
                 >
                   {social.svg}
@@ -76,24 +77,24 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Collections Links (2.5 cols) */}
-          <div className="lg:col-span-2.5 flex flex-col items-start">
-            <h4 className="font-serif text-lg text-[#D4AF37] font-bold uppercase tracking-widest mb-6 relative">
-              Collections
+          {/* 2. Shop Categories (span 2) */}
+          <div className="col-span-1 lg:col-span-2 flex flex-col items-start text-left">
+            <h4 className="font-serif text-sm text-[#D4AF37] font-bold uppercase tracking-widest mb-6 relative">
+              Shop Categories
               <span className="absolute bottom-[-6px] left-0 w-8 h-[1px] bg-[#D4AF37]" />
             </h4>
-            <ul className="flex flex-col gap-3 text-left">
+            <ul className="flex flex-col gap-3">
               {[
-                { name: "Gold Collection", href: "/gold" },
-                { name: "Silver Collection", href: "/rings" },
-                { name: "Wedding Bands", href: "/rings" },
-                { name: "Diamond Series", href: "/gold" },
-                { name: "Exclusive Minimal", href: "/home" },
+                { name: "Gold Jewelry", href: "/gold" },
+                { name: "Rings", href: "/rings" },
+                { name: "Earrings", href: "/earrings" },
+                { name: "Necklaces", href: "/necklaces" },
+                { name: "Bracelets", href: "/bracelets" },
               ].map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="font-sans text-xs text-white/50 hover:text-[#D4AF37] transition-colors duration-200"
+                    className="font-sans text-xs text-[#FAF6F0]/50 hover:text-[#D4AF37] transition-colors duration-200"
                   >
                     {link.name}
                   </Link>
@@ -102,24 +103,24 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Customer Care Links (2.5 cols) */}
-          <div className="lg:col-span-2.5 flex flex-col items-start">
-            <h4 className="font-serif text-lg text-[#D4AF37] font-bold uppercase tracking-widest mb-6 relative">
-              Customer Care
+          {/* 3. Customer Service (span 2) */}
+          <div className="col-span-1 lg:col-span-2 flex flex-col items-start text-left">
+            <h4 className="font-serif text-sm text-[#D4AF37] font-bold uppercase tracking-widest mb-6 relative">
+              Customer Service
               <span className="absolute bottom-[-6px] left-0 w-8 h-[1px] bg-[#D4AF37]" />
             </h4>
-            <ul className="flex flex-col gap-3 text-left">
+            <ul className="flex flex-col gap-3">
               {[
                 { name: "Bespoke Consulting", href: "/about" },
                 { name: "Order Tracking", href: "/cart" },
                 { name: "Jewelry Care Guide", href: "/about" },
-                { name: "Shipping & Returns", href: "/about" },
                 { name: "Lifetime Warranty", href: "/about" },
+                { name: "Book Appointment", href: "/contact" },
               ].map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="font-sans text-xs text-white/50 hover:text-[#D4AF37] transition-colors duration-200"
+                    className="font-sans text-xs text-[#FAF6F0]/50 hover:text-[#D4AF37] transition-colors duration-200"
                   >
                     {link.name}
                   </Link>
@@ -128,61 +129,156 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: Newsletter input (3 cols) */}
-          <div className="lg:col-span-3 flex flex-col items-start">
-            <h4 className="font-serif text-lg text-[#D4AF37] font-bold uppercase tracking-widest mb-6 relative">
-              Newsletter
+          {/* 4. Company Links (span 2) */}
+          <div className="col-span-1 lg:col-span-2 flex flex-col items-start text-left">
+            <h4 className="font-serif text-sm text-[#D4AF37] font-bold uppercase tracking-widest mb-6 relative">
+              Company
               <span className="absolute bottom-[-6px] left-0 w-8 h-[1px] bg-[#D4AF37]" />
             </h4>
-            <p className="font-sans text-[11px] text-white/60 leading-relaxed mb-6 text-left">
-              Subscribe to receive exclusive previews, private sales, and luxury lifestyle guides.
-            </p>
+            <ul className="flex flex-col gap-3">
+              {[
+                { name: "About Us", href: "/about" },
+                { name: "Contact Us", href: "/contact" },
+                { name: "Our Stores", href: "/contact" },
+                { name: "Careers", href: "/about" },
+                { name: "Press & Media", href: "/about" },
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="font-sans text-xs text-[#FAF6F0]/50 hover:text-[#D4AF37] transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="w-full flex items-center border-b border-[#D4AF37]/30 focus-within:border-[#D4AF37] transition-colors duration-300 pb-2.5 relative"
-            >
-              <Mail className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-              <input
-                type="email"
-                placeholder="your.email@luxury.com"
-                className="w-full bg-transparent pl-7 pr-10 outline-none font-sans text-xs tracking-wider text-white placeholder:text-white/20"
-                required
-              />
-              <button
-                type="submit"
-                className="absolute right-0 top-1/2 -translate-y-1/2 text-[#D4AF37] hover:scale-110 transition-transform duration-300"
-                aria-label="Subscribe"
-              >
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </form>
+          {/* 5. Policies (span 2) */}
+          <div className="col-span-1 lg:col-span-2 flex flex-col items-start text-left">
+            <h4 className="font-serif text-sm text-[#D4AF37] font-bold uppercase tracking-widest mb-6 relative">
+              Policies
+              <span className="absolute bottom-[-6px] left-0 w-8 h-[1px] bg-[#D4AF37]" />
+            </h4>
+            <ul className="flex flex-col gap-3">
+              {[
+                { name: "Privacy Policy", href: "/about" },
+                { name: "Terms & Conditions", href: "/about" },
+                { name: "Shipping Policy", href: "/about" },
+                { name: "Refund & Return Policy", href: "/about" },
+                { name: "Secure Shopping", href: "/about" },
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="font-sans text-xs text-[#FAF6F0]/50 hover:text-[#D4AF37] transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
         </div>
 
-        {/* ─── BOTTOM SECTION: Copyright & Payment Accents ─── */}
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col md:items-start text-center md:text-left gap-1">
-            <p className="font-sans text-[10px] text-white/40 uppercase tracking-widest">
+        {/* ROW 2: Contact Details & Newsletter Input */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-10 border-b border-white/10 text-left">
+          
+          {/* 6. Contact Details */}
+          <div className="flex flex-col md:flex-row gap-6 md:gap-12 items-start justify-start">
+            <div className="flex flex-col items-start">
+              <h4 className="font-serif text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-4">
+                Contact Details
+              </h4>
+              <div className="flex flex-col space-y-3 font-sans text-xs text-[#FAF6F0]/70">
+                <a href="mailto:info@aurelia.com" className="flex items-center gap-2.5 hover:text-[#D4AF37] transition-colors">
+                  <Mail className="w-4 h-4 text-[#D4AF37]/80" />
+                  info@aurelia.com
+                </a>
+                <a href="tel:+919876543210" className="flex items-center gap-2.5 hover:text-[#D4AF37] transition-colors">
+                  <Phone className="w-4 h-4 text-[#D4AF37]/80" />
+                  +91 98765 43210
+                </a>
+                <div className="flex items-start gap-2.5">
+                  <MapPin className="w-4 h-4 text-[#D4AF37]/80 mt-0.5" />
+                  <span>Kyalami Business Park, Midrand, South Africa</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 7. The Aurelia Promise (Trust Badges) */}
+          <div className="flex flex-col items-start w-full">
+            <h4 className="font-serif text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-4">
+              The Aurelia Promise
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5 w-full font-sans text-xs text-[#FAF6F0]/70">
+              <div className="flex items-start gap-2.5">
+                <Sparkles className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-[#D4AF37] block font-bold tracking-wider uppercase text-[10px]">100% Certified</span>
+                  <span className="text-[11px] leading-normal text-[#FAF6F0]/50">Ethically sourced conflict-free diamonds</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <div className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5 flex items-center justify-center">
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                </div>
+                <div>
+                  <span className="text-[#D4AF37] block font-bold tracking-wider uppercase text-[10px]">Complimentary Shipping</span>
+                  <span className="text-[11px] leading-normal text-[#FAF6F0]/50">Fully insured secure worldwide delivery</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <div className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5 flex items-center justify-center">
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2C7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4V8h3.08c.09.28.21.55.37.79l2.42 3.23L8 15.67V17h1.33l3.67-4.89 3.67 4.89H18v-1.33l-1.87-3.65 2.42-3.23c.16-.24.28-.51.37-.79H20v11z"/></svg>
+                </div>
+                <div>
+                  <span className="text-[#D4AF37] block font-bold tracking-wider uppercase text-[10px]">Signature Packaging</span>
+                  <span className="text-[11px] leading-normal text-[#FAF6F0]/50">Complimentary handcrafted velvet box</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <div className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5 flex items-center justify-center">
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                </div>
+                <div>
+                  <span className="text-[#D4AF37] block font-bold tracking-wider uppercase text-[10px]">Lifetime Care</span>
+                  <span className="text-[11px] leading-normal text-[#FAF6F0]/50">Complimentary cleaning and security checks</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* ROW 3: Copyright, Credit & Payment Icons */}
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+          
+          {/* 10. Copyright & Custom Credit */}
+          <div className="flex flex-col gap-1 items-center md:items-start">
+            <p className="font-sans text-[10px] text-[#FAF6F0]/40 uppercase tracking-widest">
               © 2026 AURELIA LUXURY. ALL RIGHTS RESERVED.
             </p>
-            <p className="font-sans text-[9px] text-[#D4AF37]/65 uppercase tracking-wider font-semibold">
-              Handcrafted in Pure Brilliance by Pallavi Jewelry (PJ).
+            <p className="font-sans text-[10px] text-[#D4AF37] uppercase tracking-wider font-semibold">
+              This website created by <span className="underline decoration-[#D4AF37]/40">Pallavi Patel</span> • Email: <a href="mailto:pallavipatel8080@gmail.com" className="hover:underline">pallavipatel8080@gmail.com</a>
             </p>
           </div>
 
-          {/* Golden outline Luxury Payment Badges */}
+          {/* 9. Payment Icons */}
           <div className="flex items-center gap-3">
             {["VISA", "MC", "AMEX", "APPLE PAY"].map((pay) => (
               <span
                 key={pay}
-                className="font-sans text-[8px] tracking-[0.15em] text-[#D4AF37] border border-[#D4AF37]/35 rounded px-2.5 py-1 font-bold uppercase bg-black/40 backdrop-blur-sm"
+                className="font-sans text-[8px] tracking-[0.15em] text-[#D4AF37] border border-[#D4AF37]/35 rounded px-2.5 py-1 font-bold uppercase bg-[#2b1810]/40 backdrop-blur-sm shadow-sm"
               >
                 {pay}
               </span>
             ))}
           </div>
+
         </div>
 
       </div>

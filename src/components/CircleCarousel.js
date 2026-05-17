@@ -9,20 +9,20 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function CircleCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [radius, setRadius] = useState(540);
+  const [radius, setRadius] = useState(330);
   const wheelTimeout = useRef(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHoveringCard, setIsHoveringCard] = useState(false);
 
-  // Responsive radius calculation (upscaled sizes)
+  // Responsive radius calculation (tighter alignment around the left curved shield)
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setRadius(270); // Mobile (upscaled from 230)
+        setRadius(160); // Mobile (decreased diameter/radius even more)
       } else if (window.innerWidth < 1024) {
-        setRadius(420); // Tablet (upscaled from 340)
+        setRadius(260); // Tablet (decreased diameter/radius even more)
       } else {
-        setRadius(540); // Desktop (upscaled from 420)
+        setRadius(330); // Desktop (decreased diameter/radius even more)
       }
     };
     handleResize();
@@ -80,26 +80,30 @@ export default function CircleCarousel() {
   const activeProduct = products[activeIndex];
 
   return (
-    <div className="w-auto -mx-6 md:-mx-12 pb-12 relative z-20 overflow-hidden select-none">
+    <div className="w-auto -mx-6 md:-mx-12 pb-0 relative z-20 overflow-hidden select-none">
       {/* Outer Editorial Container with Wheel Listener (Upscaled height: h-[80vh] md:h-[90vh]) */}
       <div
         ref={containerRef}
         onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
-        className="relative w-full h-[75vh] md:h-[90vh] bg-[#FAF6F0] border-y border-brand-border/30 shadow-[0_35px_90px_10px_rgba(0,0,0,0.22)] flex items-center overflow-visible"
+        className="relative w-full h-[90vh] md:h-[160vh] bg-[#F5EDE0] flex items-center overflow-visible"
       >
+        {/* ─── SMOKY EDGE GRADIENTS  top ─── */}
+        <div className="absolute top-0 left-0 right-0 h-30 bg-gradient-to-b from-[#F5EDE0] via-[#F5EDE0]/90 to-transparent pointer-events-none z-30" />
+        {/* ─── SMOKY EDGE GRADIENTS  bottom ─── */}
+        <div className="absolute bottom-0 left-0 right-0 h-70 bg-gradient-to-t from-[#F5EDE0] via-[#F5EDE0]/95 to-transparent pointer-events-none z-30" />
 
         {/* ─── CLIPPING VIEWPORT: Clips the giant wheel at banner bounds while keeping shadow soft ─── */}
         <div className="absolute inset-0 overflow-hidden rounded-none z-10">
 
           {/* ─── LEFT: Massive Curved Brand Shield (Center of Wheel - Upscaled dimension) ─── */}
           <div
-            className="absolute -left-[40vh] md:-left-[50vh] w-[90vh] md:w-[115vh] h-[90vh] md:h-[115vh] rounded-full bg-[#736357] text-[#FAF6F0] flex items-center justify-end pr-10 md:pr-16 z-30 shadow-2xl transition-all duration-500"
+            className="absolute top-[8vh] md:top-[12vh] -left-[40vh] md:-left-[50vh] w-[90vh] md:w-[115vh] h-[90vh] md:h-[115vh] rounded-full bg-[#736357] text-[#FAF6F0] flex items-center justify-end pr-10 md:pr-16 z-30 shadow-2xl transition-all duration-500"
             style={{
               boxShadow: "15px 0px 50px rgba(43, 42, 42, 0.18)",
             }}
           >
             {/* Inner Text Brand block (Upscaled sizing) */}
-            <div className="flex flex-col items-center text-center max-w-[280px] md:max-w-[340px] pb-30 pr-20">
+            <div className="flex flex-col items-center text-center max-w-[280px] md:max-w-[340px] pb-14 pr-20">
               {/* Top gold line */}
               <div className="w-28 h-[1px] bg-[#FAF6F0]/30 mb-6" />
 
@@ -128,7 +132,7 @@ export default function CircleCarousel() {
           </div>
 
           {/* ─── CONTROLS: Luxury Nav Arrows ─── */}
-          <div className="absolute top-6 left-6 md:top-12 md:left-12 z-40 flex gap-3">
+          <div className="absolute top-12 left-6 md:top-24 md:left-12 z-40 flex gap-3">
             <button
               onClick={handlePrev}
               className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/20 bg-[#736357]/80 backdrop-blur-md text-[#FAF6F0] flex items-center justify-center hover:bg-[#736357] hover:scale-105 transition-all duration-300 shadow-md"
@@ -146,7 +150,7 @@ export default function CircleCarousel() {
           </div>
 
           {/* ─── CENTER: Rotating Circular Arc of Products ─── */}
-          <div className="absolute inset-y-0 right-0 left-0 z-10 flex items-center pointer-events-none">
+          <div className="absolute top-[20vh] md:top-[28vh] bottom-0 right-40 -left-9 z-10 flex items-center pointer-events-none">
             <div className="relative w-full h-full">
               {products.map((product, index) => {
                 // Calculate wrapping diff relative to activeIndex
@@ -155,8 +159,8 @@ export default function CircleCarousel() {
                 if (diff > half) diff -= products.length;
                 if (diff < -half) diff += products.length;
 
-                // Angle for each slot (spacing of 28 degrees)
-                const angle = diff * 28;
+                // Angle for each slot (spacing of 36 degrees for wider gap)
+                const angle = diff * 46;
 
                 // Hide items that are too far behind the wheel curves
                 const isVisible = Math.abs(diff) <= 2;
@@ -164,7 +168,7 @@ export default function CircleCarousel() {
                 return (
                   <div
                     key={product.id}
-                    className="product-card-trigger absolute top-1/2 left-0 -translate-y-1/2 pointer-events-auto cursor-none select-none origin-left"
+                    className="product-card-trigger absolute top-1/2 left-60 -translate-y-1/2 pointer-events-auto cursor-none select-none origin-left"
                     style={{
                       transform: `translateY(-50%) rotate(${angle}deg) translateX(${radius}px) rotate(${-angle}deg)`,
                       opacity: isVisible ? 1 : 0,
@@ -177,22 +181,24 @@ export default function CircleCarousel() {
                     onMouseLeave={() => setIsHoveringCard(false)}
                   >
                     <div className="block group">
-                      {/* Curved/Arched Luxury Card (Upscaled width: w-[160px] md:w-[260px]) */}
+                      {/* Curved/Arched Luxury Card (Upscaled size: w-[190px] md:w-[310px]) */}
                       <div
-                        className={`relative w-[160px] md:w-[260px] aspect-[4/5] bg-white rounded-l-[50px] rounded-r-[15px] md:rounded-l-[100px] md:rounded-r-[25px] overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.55)] border border-black transition-all duration-500 ${diff === 0
+                        className={`relative w-[190px] md:w-[310px] aspect-[4/5] bg-white rounded-l-[50px] rounded-r-[15px] md:rounded-l-[100px] md:rounded-r-[25px] overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.55)] border border-black transition-all duration-500 ${diff === 0
                           ? "ring-2 ring-black ring-offset-4 ring-offset-[#FAF6F0] scale-105"
                           : "opacity-60 scale-95 hover:opacity-90"
                           }`}
                       >
-                        {/* Luxury Silk BG embedded */}
+                        {/* Luxury Silk BG embedded (object-contain with proper padding ensures the full jewelry item is perfectly visible!) */}
                         <Image
                           src={product.image}
                           alt={product.name}
                           fill
-                          sizes="(max-width: 768px) 160px, 260px"
-                          className="object-cover p-6 md:p-10 transition-transform duration-700 group-hover:scale-105"
+                          sizes="(max-width: 768px) 190px, 310px"
+                          className="object-contain p-4 md:p-8 transition-transform duration-700 group-hover:scale-[1.07]"
+                          style={{ mixBlendMode: "multiply" }}
                         />
                       </div>
+
                     </div>
                   </div>
                 );
@@ -203,7 +209,7 @@ export default function CircleCarousel() {
         </div> {/* ─── END OF CLIPPING VIEWPORT ─── */}
 
         {/* ─── RIGHT: Active Product Description panel (Dynamic changes - Upscaled size: max-w-[380px]) ─── */}
-        <div className="absolute right-6 md:right-16 lg:right-24 top-1/2 -translate-y-1/2 z-30 w-full max-w-[280px] md:max-w-[380px] pointer-events-auto">
+        <div className="absolute right-6 md:right-16 lg:right-24 top-1/2 pb-44 -translate-y-1/2 z-30 w-full max-w-[280px] md:max-w-[380px] pointer-events-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeProduct.id}

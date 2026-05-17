@@ -43,6 +43,7 @@ import MarqueeBanner from "./MarqueeBanner";
 import ProductCarousel from "./ProductCarousel";
 import CollectionBanner from "./CollectionBanner";
 import CircleCarousel from "./CircleCarousel";
+import SilverSection from "./SilverSection";
 import Image from "next/image";
 
 export default function HeroSection() {
@@ -254,6 +255,9 @@ export default function HeroSection() {
 
       {/* Circle Carousel */}
       <CircleCarousel />
+
+      {/* Silver Section Banner */}
+      <SilverSection />
 
       {/* Custom Tracking Cursor */}
       <AnimatePresence>

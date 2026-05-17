@@ -18,7 +18,7 @@ export default function SilverCircleCarousel() {
       p.material.toLowerCase().includes("white gold") ||
       p.material.toLowerCase().includes("platinum") ||
       p.name.toLowerCase().includes("silver") ||
-      p.category === "Rings" || 
+      p.category === "Rings" ||
       p.id === 4 ||
       p.id === 5
   );
@@ -50,7 +50,7 @@ export default function SilverCircleCarousel() {
   // Scroll handler for Carousel Rotation
   const handleWheel = (e) => {
     if (Math.abs(e.deltaY) < 20) return;
-    
+
     // Prevent default body scrolling while interacting with carousel
     e.preventDefault();
 
@@ -72,15 +72,15 @@ export default function SilverCircleCarousel() {
   const activeProduct = silverProducts[activeIndex];
 
   return (
-    <div className="w-full px-4 md:px-10 pb-16 relative z-20 overflow-hidden select-none">
-      {/* Outer Editorial Container - Dark Theme (h-[75vh] md:h-[90vh]) */}
-      <div 
+    <div className="w-full pb-16 relative z-20 overflow-hidden select-none">
+      {/* Outer Editorial Container - Dark Theme (h-[75vh] md:h-[90vh]) - Full Screen Bleed */}
+      <div
         onWheel={handleWheel}
-        className="relative w-full h-[75vh] md:h-[90vh] bg-[#121212] rounded-sm border border-white/10 shadow-2xl flex items-center overflow-hidden"
+        className="relative w-full h-[75vh] md:h-[90vh] bg-[#121212] border-y border-white/10 shadow-2xl flex items-center overflow-hidden"
       >
-        
+
         {/* ─── RIGHT: Massive Curved Brand Shield (Center of Wheel on RIGHT) ─── */}
-        <div 
+        <div
           className="absolute -right-[40vh] md:-right-[50vh] w-[90vh] md:w-[115vh] h-[90vh] md:h-[115vh] rounded-full bg-[#1C1C1C] text-white flex items-center justify-start pl-20 md:pl-40 z-30 shadow-2xl transition-all duration-500 border border-white/5"
           style={{
             boxShadow: "-15px 0px 50px rgba(0,0,0,0.4)",
@@ -88,7 +88,7 @@ export default function SilverCircleCarousel() {
         >
           {/* Inner Text Brand block (Mirrored layout, Left-aligned) */}
           <div className="flex flex-col items-start text-left max-w-[280px] md:max-w-[340px] pl-4 md:pl-12">
-            
+
             {/* Cursive Custom Cursive Logo "PJ" exactly like screenshot */}
             <div className="font-serif italic text-4xl md:text-6xl text-brand-btn font-light leading-none mb-6 self-start">
               PJ
@@ -96,14 +96,14 @@ export default function SilverCircleCarousel() {
 
             {/* Top divider */}
             <div className="w-28 h-[1px] bg-white/20 mb-6" />
-            
+
             <h2 className="font-serif text-3xl md:text-5xl tracking-[0.15em] text-white uppercase leading-none font-bold mb-3">
               2025
             </h2>
             <h2 className="font-sans text-xs md:text-sm tracking-[0.25em] text-white/80 uppercase font-semibold mb-6">
               SILVER COLLECTION
             </h2>
-            
+
             {/* Bottom divider */}
             <div className="w-28 h-[1px] bg-white/20 mb-8" />
 
@@ -176,12 +176,11 @@ export default function SilverCircleCarousel() {
                 >
                   <div className="block group">
                     {/* Curved/Arched Luxury Card (Upscaled width: w-[160px] md:w-[260px] with mirrored borders) */}
-                    <div 
-                      className={`relative w-[160px] md:w-[260px] aspect-[4/5] bg-[#1a1a1a] rounded-r-[50px] rounded-l-[15px] md:rounded-r-[100px] md:rounded-l-[25px] overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ${
-                        diff === 0 
-                          ? "ring-2 ring-brand-btn ring-offset-4 ring-offset-[#121212] scale-105" 
-                          : "opacity-40 scale-95 hover:opacity-75"
-                      }`}
+                    <div
+                      className={`relative w-[160px] md:w-[260px] aspect-[4/5] bg-[#1a1a1a] rounded-r-[50px] rounded-l-[15px] md:rounded-r-[100px] md:rounded-l-[25px] overflow-hidden shadow-2xl border border-white/10 transition-all duration-500 ${diff === 0
+                        ? "ring-2 ring-brand-btn ring-offset-4 ring-offset-[#121212] scale-105"
+                        : "opacity-40 scale-95 hover:opacity-75"
+                        }`}
                     >
                       {/* Silver Jewel image */}
                       <Image

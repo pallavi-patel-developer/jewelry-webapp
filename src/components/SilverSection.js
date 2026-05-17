@@ -25,10 +25,18 @@ export default function SilverSection() {
 
   return (
     <div className="w-full px-4 md:px-10 pb-24 relative z-20 overflow-visible select-none">
-      
+
+      {/* ─── BOTTOM SUB-LABEL: AURELIA TOP SILVER STYLE (Centered, Black, same size/font) ─── */}
+      <div className="text-center mt-12 px-4">
+        <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl text-black tracking-[0.25em] uppercase font-bold">
+          AURELIA TOP SILVER STYLE
+        </h2>
+        <div className="w-16 h-[1px] bg-black/30 mx-auto mt-3" />
+      </div>
+
       {/* ─── MAIN BANNER BOX ─── */}
-      <div className="relative w-full h-[55vh] md:h-[65vh] rounded-sm overflow-hidden border border-brand-border/20 shadow-xl bg-black">
-        
+      <div className="relative w-full h-[55vh] md:h-[65vh] rounded-sm overflow-hidden border border-brand-border/20 shadow-[0_0_100px_20px_rgba(0,0,0,0.65)] bg-black">
+
         {/* Background Moody Silver Rings Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -46,11 +54,11 @@ export default function SilverSection() {
         {/* Text Content Overlay */}
         <div className="absolute inset-y-0 left-8 md:left-16 flex flex-col justify-center z-10 max-w-[85%] md:max-w-[45%] text-white">
           <h2 className="font-serif text-4xl md:text-6xl text-white tracking-wide uppercase leading-tight font-bold mb-4"
-              style={{ textShadow: "0 2px 10px rgba(0,0,0,0.3)" }}>
+            style={{ textShadow: "0 2px 10px rgba(0,0,0,0.3)" }}>
             Discover <br />
             Your Sparkle
           </h2>
-          
+
           <p className="font-sans text-[11px] md:text-xs text-white/80 leading-relaxed max-w-[320px] mb-8 font-medium">
             Welcoming in The Spring Season With An Enchanting Emerald, Diamond & Silver Daze With Earrings.
           </p>
@@ -76,11 +84,11 @@ export default function SilverSection() {
       {/* ─── BOTTOM OVERLAPPING CATEGORY CARDS ─── */}
       <div className="relative max-w-[1200px] mx-auto px-2 md:px-8 -mt-16 md:-mt-24 z-30">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-          
+
           {categories.map((cat, idx) => (
             <div
               key={cat.title}
-              className="bg-white/95 backdrop-blur-md rounded-[24px] p-6 shadow-xl border border-brand-border/10 flex flex-col justify-between items-start transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group"
+              className="bg-white/95 backdrop-blur-md rounded-[24px] p-6 shadow-[0_30px_70px_-15px_rgba(0,0,90,0.18)] border border-brand-border/10 flex flex-col justify-between items-start transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group"
             >
               <div className="w-full">
                 {/* Small Tag */}
@@ -116,9 +124,8 @@ export default function SilverSection() {
             </div>
           ))}
 
-          {/* Overlapping Next circle button (exactly like screen shot on right edge) */}
-          <button 
-            className="absolute right-[-16px] md:right-[-32px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/90 text-white flex items-center justify-center hover:bg-brand-btn shadow-2xl z-40 transition-all duration-300 hover:scale-105 border border-white/10 hidden md:flex"
+          <button
+            className="absolute right-[-16px] md:right-[-32px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/90 text-white flex items-center justify-center hover:bg-brand-btn shadow-[0_40px_35px_rgba(10,10,0,0.4)] z-40 transition-all duration-300 hover:scale-105 border border-white/10 hidden md:flex"
             aria-label="Next categories"
           >
             <ChevronRight className="w-6 h-6" strokeWidth={1.5} />

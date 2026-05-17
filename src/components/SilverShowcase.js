@@ -16,7 +16,7 @@ export default function SilverShowcase() {
       p.material.toLowerCase().includes("white gold") ||
       p.material.toLowerCase().includes("platinum") ||
       p.name.toLowerCase().includes("silver") ||
-      p.category === "Rings" || 
+      p.category === "Rings" ||
       p.id === 4 ||
       p.id === 5
   );
@@ -40,15 +40,15 @@ export default function SilverShowcase() {
   return (
     <div className="w-full px-4 md:px-10 pb-20 relative z-20 select-none">
       {/* Container - Black Theme Background with Silver/Gold borders */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#121212] p-8 md:p-12 rounded-sm border border-white/10 shadow-2xl">
-        
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#121212] p-8 md:p-12 rounded-sm border border-white/10 shadow-[0_0_100px_20px_rgba(0,0,0,0.65)]">
+
         {/* ─── LEFT PANEL: Text Description Block with Gold & Silver highlights ─── */}
         <div className="lg:col-span-4 flex flex-col items-start text-left">
           <h2 className="font-serif text-3xl md:text-5xl uppercase leading-tight font-bold mb-4">
             <span className="text-white">Silver &</span> <br className="hidden md:inline" />
             <span className="text-[#D4AF37] filter drop-shadow-sm">Engagement Ring</span>
           </h2>
-          
+
           <p className="font-sans text-xs md:text-sm text-white/70 leading-relaxed mb-8 max-w-[340px] font-medium">
             Experience the stunning brilliance of silver jewellery. Find the perfect silver ornament for any special occasion, from wedding bands and engagement rings to elegant anniversary gifts with golden highlights.
           </p>
@@ -63,17 +63,16 @@ export default function SilverShowcase() {
 
         {/* ─── RIGHT PANEL: Carousel Block (8 cols) ─── */}
         <div className="lg:col-span-8 flex flex-col relative w-full overflow-hidden">
-          
+
           {/* Nav Controls - Top Right (Gold/Black theme) */}
           <div className="flex justify-end gap-2 mb-6 z-30">
             <button
               onClick={handlePrev}
               disabled={startIndex === 0}
-              className={`w-10 h-10 rounded-sm flex items-center justify-center transition-all border ${
-                startIndex === 0
+              className={`w-10 h-10 rounded-sm flex items-center justify-center transition-all border ${startIndex === 0
                   ? "bg-[#1E1E1E] text-white/20 border-white/5 cursor-not-allowed"
                   : "bg-black text-[#D4AF37] border-white/10 hover:bg-[#D4AF37] hover:text-black shadow-md"
-              }`}
+                }`}
               aria-label="Previous items"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -81,11 +80,10 @@ export default function SilverShowcase() {
             <button
               onClick={handleNext}
               disabled={startIndex + 2 >= silverProducts.length}
-              className={`w-10 h-10 rounded-sm flex items-center justify-center transition-all border ${
-                startIndex + 2 >= silverProducts.length
+              className={`w-10 h-10 rounded-sm flex items-center justify-center transition-all border ${startIndex + 2 >= silverProducts.length
                   ? "bg-[#1E1E1E] text-white/20 border-white/5 cursor-not-allowed"
                   : "bg-black text-[#D4AF37] border-white/10 hover:bg-[#D4AF37] hover:text-black shadow-md"
-              }`}
+                }`}
               aria-label="Next items"
             >
               <ChevronRight className="w-5 h-5" />
@@ -120,9 +118,8 @@ export default function SilverShowcase() {
                       aria-label="Add to wishlist"
                     >
                       <Heart
-                        className={`w-4 h-4 transition-colors ${
-                          favorites[product.id] ? "fill-[#D4AF37] text-[#D4AF37]" : "text-white/60"
-                        }`}
+                        className={`w-4 h-4 transition-colors ${favorites[product.id] ? "fill-[#D4AF37] text-[#D4AF37]" : "text-white/60"
+                          }`}
                       />
                     </button>
                   </div>
@@ -167,6 +164,7 @@ export default function SilverShowcase() {
         </div>
 
       </div>
+
     </div>
   );
 }

@@ -39,7 +39,7 @@ export default function CircleCarousel() {
   // Scroll handler for Carousel Rotation
   const handleWheel = (e) => {
     if (Math.abs(e.deltaY) < 20) return;
-    
+
     // Prevent default body scrolling while interacting with carousel
     e.preventDefault();
 
@@ -63,13 +63,13 @@ export default function CircleCarousel() {
   return (
     <div className="w-full px-4 md:px-10 pb-12 relative z-20 overflow-hidden select-none">
       {/* Outer Editorial Container with Wheel Listener (Upscaled height: h-[80vh] md:h-[90vh]) */}
-      <div 
+      <div
         onWheel={handleWheel}
         className="relative w-full h-[75vh] md:h-[90vh] bg-[#FAF6F0] rounded-sm border border-brand-border/30 shadow-md flex items-center overflow-hidden"
       >
-        
+
         {/* ─── LEFT: Massive Curved Brand Shield (Center of Wheel - Upscaled dimension) ─── */}
-        <div 
+        <div
           className="absolute -left-[40vh] md:-left-[50vh] w-[90vh] md:w-[115vh] h-[90vh] md:h-[115vh] rounded-full bg-[#736357] text-[#FAF6F0] flex items-center justify-end pr-20 md:pr-40 z-30 shadow-2xl transition-all duration-500"
           style={{
             boxShadow: "15px 0px 50px rgba(0,0,0,0.18)",
@@ -79,18 +79,18 @@ export default function CircleCarousel() {
           <div className="flex flex-col items-center text-center max-w-[280px] md:max-w-[340px] pr-4 md:pr-12">
             {/* Top gold line */}
             <div className="w-28 h-[1px] bg-[#FAF6F0]/30 mb-6" />
-            
+
             <p className="font-sans text-[10px] md:text-xs tracking-[0.4em] text-[#FAF6F0]/70 uppercase mb-3">
               Aurelia Luxury
             </p>
-            
+
             <h2 className="font-serif text-3xl md:text-5xl tracking-[0.1em] text-[#FAF6F0] uppercase leading-none font-bold mb-3">
               NEW
             </h2>
             <h2 className="font-serif text-3xl md:text-4xl tracking-[0.15em] text-[#FAF6F0]/90 uppercase leading-none font-medium mb-4">
               COLLECTION
             </h2>
-            
+
             <div className="flex items-center gap-2 mb-4">
               <Sparkle className="w-4 h-4 text-brand-btn fill-current" />
             </div>
@@ -153,12 +153,11 @@ export default function CircleCarousel() {
                 >
                   <div className="block group">
                     {/* Curved/Arched Luxury Card (Upscaled width: w-[160px] md:w-[260px]) */}
-                    <div 
-                      className={`relative w-[160px] md:w-[260px] aspect-[4/5] bg-white rounded-l-[50px] rounded-r-[15px] md:rounded-l-[100px] md:rounded-r-[25px] overflow-hidden shadow-2xl border border-brand-border/20 transition-all duration-500 ${
-                        diff === 0 
-                          ? "ring-2 ring-brand-btn ring-offset-4 ring-offset-[#FAF6F0] scale-105" 
+                    <div
+                      className={`relative w-[160px] md:w-[260px] aspect-[4/5] bg-white rounded-l-[50px] rounded-r-[15px] md:rounded-l-[100px] md:rounded-r-[25px] overflow-hidden shadow-2xl border border-brand-border/20 transition-all duration-500 ${diff === 0
+                          ? "ring-2 ring-brand-btn ring-offset-4 ring-offset-[#FAF6F0] scale-105"
                           : "opacity-60 scale-95 hover:opacity-90"
-                      }`}
+                        }`}
                     >
                       {/* Luxury Silk BG embedded */}
                       <Image

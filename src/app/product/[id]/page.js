@@ -2,9 +2,10 @@
 
 import { useState, use } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { products } from "@/data/products";
 import Navbar from "@/components/Navbar";
-import { ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShoppingBag, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 
 export default function ProductPage({ params }) {
   const resolvedParams = use(params);
@@ -13,6 +14,11 @@ export default function ProductPage({ params }) {
   const product = products.find((p) => p.id.toString() === id);
   const [selectedSize, setSelectedSize] = useState("");
   const [activeImage, setActiveImage] = useState(0);
+  const [relatedOffset, setRelatedOffset] = useState(0);
+
+  const allRelated = products.filter((p) => p.id !== product?.id);
+  const relatedProducts = [...allRelated, ...allRelated].slice(relatedOffset, relatedOffset + 4);
+  const handleNext = () => setRelatedOffset((prev) => (prev + 1) % allRelated.length);
 
   if (!product) {
     return (
@@ -174,6 +180,61 @@ export default function ProductPage({ params }) {
           </div>
 
         </div>
+
+        {/* You May Also Like */}
+        <section className="mt-20 pt-12 border-t border-brand-border/40">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-serif text-brand-heading">You may also like</h2>
+            <button
+              onClick={handleNext}
+              aria-label="Show next products"
+              className="flex items-center gap-2 font-sans text-xs tracking-[0.2em] uppercase text-brand-body border border-brand-border rounded-full px-4 py-2 hover:border-brand-heading hover:text-brand-heading transition-all duration-200"
+            >
+              NEXT <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {relatedProducts.map((item, idx) => (
+              <Link
+                key={`${item.id}-${idx}`}
+                href={`/product/${item.id}`}
+                className="flex flex-col items-center group"
+              >
+                {/* Arch Card */}
+                <div
+                  className="relative w-full bg-[#EDE5DA] overflow-hidden flex items-center justify-center mb-3"
+                  style={{
+                    borderRadius: "9999px 9999px 0 0",
+                    aspectRatio: "3 / 4",
+                  }}
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-contain p-8 group-hover:scale-105 transition-transform duration-500"
+                    style={{ mixBlendMode: "multiply" }}
+                  />
+                </div>
+
+                {/* Info */}
+                <div className="flex flex-col items-center text-center w-full px-1">
+                  <p className="font-sans text-[11px] text-brand-body tracking-wide uppercase mb-1 line-clamp-2">
+                    {item.name}
+                  </p>
+                  <p className="font-sans text-sm text-brand-heading font-medium mb-3">
+                    {item.discountedPrice}
+                  </p>
+                  <button className="w-full border border-brand-border text-brand-heading font-sans text-[10px] tracking-[0.15em] uppercase py-2 px-3 hover:bg-brand-heading hover:text-white hover:border-brand-heading transition-all duration-200 rounded-sm">
+                    Add to Bag
+                  </button>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );

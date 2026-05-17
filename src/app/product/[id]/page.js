@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/data/products";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { ShoppingBag, ChevronLeft, ChevronRight, ArrowRight, ArrowLeft } from "lucide-react";
 
 export default function ProductPage({ params }) {
@@ -268,6 +269,7 @@ export default function ProductPage({ params }) {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

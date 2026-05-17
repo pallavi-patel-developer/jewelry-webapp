@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import { Trash2, Plus, Minus, ArrowLeft, Heart, Bookmark } from "lucide-react";
@@ -157,6 +158,7 @@ export default function CartPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

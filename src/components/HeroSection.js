@@ -45,6 +45,7 @@ import CollectionBanner from "./CollectionBanner";
 import CircleCarousel from "./CircleCarousel";
 import SilverSection from "./SilverSection";
 import SilverCircleCarousel from "./SilverCircleCarousel";
+import SilverShowcase from "./SilverShowcase";
 import Image from "next/image";
 
 export default function HeroSection() {
@@ -262,6 +263,9 @@ export default function HeroSection() {
 
       {/* Silver Circle Carousel */}
       <SilverCircleCarousel />
+
+      {/* Silver Showcase Segment */}
+      <SilverShowcase />
 
       {/* Custom Tracking Cursor */}
       <AnimatePresence>

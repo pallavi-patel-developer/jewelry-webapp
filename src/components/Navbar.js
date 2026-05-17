@@ -31,7 +31,7 @@ export default function Navbar() {
       
       {/* Center: Navigation Links */}
       <div className="hidden md:flex items-center justify-center gap-10 flex-1">
-        <Link href="/" className="text-sm font-sans tracking-[0.15em] text-brand-heading hover:text-brand-btn-hover transition-colors uppercase font-medium">
+        <Link href="/home" className="text-sm font-sans tracking-[0.15em] text-brand-heading hover:text-brand-btn-hover transition-colors uppercase font-medium">
           Home
         </Link>
         <Link href="/about" className="text-sm font-sans tracking-[0.15em] text-brand-heading hover:text-brand-btn-hover transition-colors uppercase font-medium whitespace-nowrap">

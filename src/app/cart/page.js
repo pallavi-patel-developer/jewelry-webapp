@@ -31,7 +31,7 @@ export default function CartPage() {
         <div className="flex flex-col gap-10">
           {/* Header */}
           <div className="flex flex-col gap-4 border-b border-brand-border pb-10">
-            <Link href="/" className="flex items-center gap-2 text-brand-body hover:text-brand-heading transition-colors w-fit group">
+            <Link href="/home" className="flex items-center gap-2 text-brand-body hover:text-brand-heading transition-colors w-fit group">
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
               <span className="text-xs uppercase tracking-widest font-sans font-medium">Back to Shopping</span>
             </Link>

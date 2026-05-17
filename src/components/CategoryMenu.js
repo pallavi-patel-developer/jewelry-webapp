@@ -1,20 +1,23 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, Disc, Gem, Link as LinkIcon, CircleDot } from "lucide-react";
 import { motion } from "framer-motion";
+
+const MotionLink = motion(Link);
 
 const categories = [
   { name: "RINGS", icon: Disc, href: "/rings" },
   { name: "EARRINGS", icon: CircleDot, href: "/earrings" },
   { name: "NECKLACES", icon: LinkIcon, href: "/necklaces" },
-  { name: "BRACELETS", icon: Gem, href: "/bracelets" }
+  { name: "BRACELETS", icon: Gem, href: "/bracelets" },
 ];
 
 export default function CategoryMenu() {
   return (
     <div className="w-full max-w-sm md:ml-auto mt-8 md:mt-0 space-y-3">
       {categories.map((category, index) => (
-        <motion.a
+        <MotionLink
           key={category.name}
           href={category.href}
           initial={{ opacity: 0, x: 20 }}
@@ -29,7 +32,7 @@ export default function CategoryMenu() {
             </span>
           </div>
           <ArrowRight className="w-4 h-4 text-brand-heading/40 group-hover:text-brand-heading group-hover:translate-x-1 transition-all duration-300" strokeWidth={1.5} />
-        </motion.a>
+        </MotionLink>
       ))}
     </div>
   );

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/data/products";
 import Navbar from "@/components/Navbar";
-import { ShoppingBag, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { ShoppingBag, ChevronLeft, ChevronRight, ArrowRight, ArrowLeft } from "lucide-react";
 
 export default function ProductPage({ params }) {
   const resolvedParams = use(params);
@@ -15,10 +15,20 @@ export default function ProductPage({ params }) {
   const [selectedSize, setSelectedSize] = useState("");
   const [activeImage, setActiveImage] = useState(0);
   const [relatedOffset, setRelatedOffset] = useState(0);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomPos, setZoomPos] = useState({ x: 50, y: 50 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setZoomPos({ x, y });
+  };
 
   const allRelated = products.filter((p) => p.id !== product?.id);
   const relatedProducts = [...allRelated, ...allRelated].slice(relatedOffset, relatedOffset + 4);
   const handleNext = () => setRelatedOffset((prev) => (prev + 1) % allRelated.length);
+  const handlePrev = () => setRelatedOffset((prev) => (prev - 1 + allRelated.length) % allRelated.length);
 
   if (!product) {
     return (
@@ -49,15 +59,28 @@ export default function ProductPage({ params }) {
           <div className="flex flex-col gap-3 sticky top-8">
 
             {/* Main Image with Arrows */}
-            <div className="relative w-full aspect-[4/5] bg-brand-hero/50 overflow-hidden rounded-md flex items-center justify-center group cursor-zoom-in">
+            <div
+              className="relative w-full aspect-[4/5] bg-brand-hero/50 overflow-hidden rounded-md flex items-center justify-center group"
+              style={{ cursor: isZoomed ? "zoom-out" : "zoom-in" }}
+              onMouseEnter={() => setIsZoomed(true)}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={() => setIsZoomed(false)}
+            >
               <Image
                 src={images[activeImage]}
                 alt={product.name}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-contain p-12 lg:p-16 transition-opacity duration-300"
-                style={{ mixBlendMode: "multiply" }}
+                className="object-contain p-12 lg:p-16"
+                style={{
+                  mixBlendMode: "multiply",
+                  transform: isZoomed ? "scale(2.5)" : "scale(1)",
+                  transformOrigin: `${zoomPos.x}% ${zoomPos.y}%`,
+                  transition: isZoomed
+                    ? "transform 0.1s ease, transform-origin 0s"
+                    : "transform 0.3s ease",
+                }}
               />
 
               {/* Left Arrow */}
@@ -185,13 +208,22 @@ export default function ProductPage({ params }) {
         <section className="mt-20 pt-12 border-t border-brand-border/40">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-serif text-brand-heading">You may also like</h2>
-            <button
-              onClick={handleNext}
-              aria-label="Show next products"
-              className="flex items-center gap-2 font-sans text-xs tracking-[0.2em] uppercase text-brand-body border border-brand-border rounded-full px-4 py-2 hover:border-brand-heading hover:text-brand-heading transition-all duration-200"
-            >
-              NEXT <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handlePrev}
+                aria-label="Show previous products"
+                className="flex items-center gap-2 font-sans text-xs tracking-[0.2em] uppercase text-brand-body border border-brand-border rounded-full px-4 py-2 hover:border-brand-heading hover:text-brand-heading transition-all duration-200"
+              >
+                <ArrowLeft className="w-3.5 h-3.5" strokeWidth={1.5} /> PREV
+              </button>
+              <button
+                onClick={handleNext}
+                aria-label="Show next products"
+                className="flex items-center gap-2 font-sans text-xs tracking-[0.2em] uppercase text-brand-body border border-brand-border rounded-full px-4 py-2 hover:border-brand-heading hover:text-brand-heading transition-all duration-200"
+              >
+                NEXT <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">

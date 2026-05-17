@@ -40,6 +40,8 @@ const heroContent = [
 ];
 import CategoryMenu from "./CategoryMenu";
 import MarqueeBanner from "./MarqueeBanner";
+import ProductCarousel from "./ProductCarousel";
+import CollectionBanner from "./CollectionBanner";
 import Image from "next/image";
 
 export default function HeroSection() {
@@ -242,6 +244,12 @@ export default function HeroSection() {
       </div>
 
       <MarqueeBanner />
+
+      {/* Product Carousel below marquee */}
+      <ProductCarousel />
+
+      {/* Collection Banner */}
+      <CollectionBanner />
 
       {/* Custom Tracking Cursor */}
       <AnimatePresence>

@@ -4,15 +4,15 @@ import { useState, use } from "react";
 import Image from "next/image";
 import { products } from "@/data/products";
 import Navbar from "@/components/Navbar";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function ProductPage({ params }) {
-  // In newer Next.js versions, params might be a promise.
   const resolvedParams = use(params);
   const { id } = resolvedParams;
 
   const product = products.find((p) => p.id.toString() === id);
   const [selectedSize, setSelectedSize] = useState("");
+  const [activeImage, setActiveImage] = useState(0);
 
   if (!product) {
     return (
@@ -25,22 +25,92 @@ export default function ProductPage({ params }) {
     );
   }
 
+  const images = product.images || [product.image, product.image, product.image, product.image];
+
+  const prevImage = () =>
+    setActiveImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  const nextImage = () =>
+    setActiveImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+
   return (
     <div className="min-h-screen flex flex-col bg-brand-bg selection:bg-brand-heading selection:text-brand-light">
       <Navbar />
 
       <main className="flex-grow w-full max-w-[1400px] mx-auto px-6 md:px-12 py-12 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-          {/* Left Column: Image */}
-          <div className="relative w-full aspect-[4/5] bg-brand-hero/50 overflow-hidden rounded-md flex items-center justify-center p-12">
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              priority
-              className="object-contain p-12 lg:p-20"
-              style={{ mixBlendMode: "multiply" }}
-            />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+
+          {/* Left Column: Image Gallery */}
+          <div className="flex flex-col gap-3 sticky top-8">
+
+            {/* Main Image with Arrows */}
+            <div className="relative w-full aspect-[4/5] bg-brand-hero/50 overflow-hidden rounded-md flex items-center justify-center group cursor-zoom-in">
+              <Image
+                src={images[activeImage]}
+                alt={product.name}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain p-12 lg:p-16 transition-opacity duration-300"
+                style={{ mixBlendMode: "multiply" }}
+              />
+
+              {/* Left Arrow */}
+              <button
+                onClick={(e) => { e.preventDefault(); prevImage(); }}
+                aria-label="Previous image"
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/70 backdrop-blur-sm border border-brand-border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white shadow-sm z-10"
+              >
+                <ChevronLeft className="w-5 h-5 text-brand-heading" strokeWidth={1.5} />
+              </button>
+
+              {/* Right Arrow */}
+              <button
+                onClick={(e) => { e.preventDefault(); nextImage(); }}
+                aria-label="Next image"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/70 backdrop-blur-sm border border-brand-border flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-white shadow-sm z-10"
+              >
+                <ChevronRight className="w-5 h-5 text-brand-heading" strokeWidth={1.5} />
+              </button>
+
+              {/* Dot Indicators */}
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                {images.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={(e) => { e.preventDefault(); setActiveImage(i); }}
+                    aria-label={`Go to image ${i + 1}`}
+                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                      activeImage === i ? "bg-brand-heading w-4" : "bg-brand-heading/30"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Thumbnail Strip */}
+            <div className="grid grid-cols-4 gap-2">
+              {images.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImage(i)}
+                  aria-label={`View image ${i + 1}`}
+                  className={`relative aspect-square rounded-sm overflow-hidden border-2 transition-all duration-200 bg-brand-hero/30 cursor-pointer ${
+                    activeImage === i
+                      ? "border-brand-heading"
+                      : "border-transparent hover:border-brand-border"
+                  }`}
+                >
+                  <Image
+                    src={img}
+                    alt={`${product.name} view ${i + 1}`}
+                    fill
+                    sizes="10vw"
+                    className="object-contain p-2"
+                    style={{ mixBlendMode: "multiply" }}
+                  />
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Right Column: Details */}
@@ -72,10 +142,11 @@ export default function ProductPage({ params }) {
                   <button
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`border transition-all duration-300 font-sans text-sm tracking-wider py-3 px-6 rounded-sm ${selectedSize === size
+                    className={`border transition-all duration-300 font-sans text-sm tracking-wider py-3 px-6 rounded-sm ${
+                      selectedSize === size
                         ? "border-brand-heading bg-brand-heading text-brand-light"
                         : "border-brand-border text-brand-heading hover:border-brand-heading"
-                      }`}
+                    }`}
                   >
                     {size}
                   </button>
@@ -101,6 +172,7 @@ export default function ProductPage({ params }) {
               </div>
             </div>
           </div>
+
         </div>
       </main>
     </div>

@@ -22,8 +22,8 @@ const menuData = [
   {
     title: "Material",
     links: [
-      { label: "Gold", href: "/gold" },
-      { label: "Silver", href: "/silver" }
+      { label: "CMF Gold", href: "/gold" },
+      { label: "925 Sterlink Silver", href: "/silver" }
     ]
   },
   {
@@ -79,7 +79,7 @@ export default function SidebarMenu({ isOpen, onClose }) {
             {/* Header */}
             <div className="flex items-center justify-between p-6 md:p-8 border-b border-brand-border">
               <h2 className="text-2xl font-serif text-brand-heading uppercase tracking-widest">Menu</h2>
-              <button 
+              <button
                 onClick={onClose}
                 className="text-brand-heading hover:text-brand-btn-hover transition-colors p-2 -mr-2 rounded-full hover:bg-brand-border/50"
               >
@@ -96,9 +96,9 @@ export default function SidebarMenu({ isOpen, onClose }) {
                   </h3>
                   <div className="flex flex-col gap-3 pl-2">
                     {section.links.map((link, linkIdx) => (
-                      <Link 
-                        key={linkIdx} 
-                        href={link.href} 
+                      <Link
+                        key={linkIdx}
+                        href={link.href}
                         onClick={onClose}
                         className="text-brand-body font-serif text-xl hover:text-brand-btn-hover hover:translate-x-1 transition-all duration-300 w-fit"
                       >
@@ -112,15 +112,15 @@ export default function SidebarMenu({ isOpen, onClose }) {
 
             {/* Account Footer */}
             <div className="p-6 md:p-8 border-t border-brand-border bg-brand-hero/10 flex flex-col gap-4">
-              <Link 
-                href="/login" 
+              <Link
+                href="/login"
                 onClick={onClose}
                 className="w-full bg-brand-heading text-brand-light py-4 px-6 text-center text-xs font-sans font-bold uppercase tracking-[0.2em] hover:bg-black transition-colors rounded-sm shadow-md"
               >
                 Sign In
               </Link>
-              <Link 
-                href="/signup" 
+              <Link
+                href="/signup"
                 onClick={onClose}
                 className="w-full border border-brand-heading text-brand-heading py-4 px-6 text-center text-xs font-sans font-bold uppercase tracking-[0.2em] hover:bg-brand-heading hover:text-brand-light transition-all rounded-sm"
               >

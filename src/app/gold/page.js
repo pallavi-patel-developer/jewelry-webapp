@@ -358,7 +358,7 @@ export default function PremiumGoldCollectionPage() {
       <main className="relative z-10">
 
         {/* ─── 1. HERO BANNER SECTION ─── */}
-        <section className="relative w-full min-h-[85vh] flex items-center py-20 md:py-28 px-6 md:px-12 lg:px-20 overflow-hidden bg-gradient-to-br from-[#F9F3E8] via-[#FFF8F0] to-[#E7D7C5]/40">
+        <section className="relative w-full min-h-[85vh] flex items-center py-20 md:py-11 px-6 md:px-12 lg:px-20 overflow-hidden bg-gradient-to-br from-[#F9F3E8] via-[#FFF8F0] to-[#E7D7C5]/40">
 
           {/* Soft Golden Glow & Lights */}
           <div className="absolute top-1/4 left-1/3 w-[35vw] h-[35vw] bg-radial from-[#E7C89A]/30 to-transparent opacity-70 rounded-full blur-[100px] pointer-events-none" />
